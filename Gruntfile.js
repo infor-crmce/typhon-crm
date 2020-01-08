@@ -2,11 +2,11 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     products: {
-      'argos-saleslogix': {
+      'typhon-crm': {
         basePath: '.',
       },
-      'argos-sdk': {
-        basePath: '../../argos-sdk',
+      'typhon-sdk': {
+        basePath: '../../typhon-sdk',
       },
     },
     'lang-pack': {
@@ -45,10 +45,10 @@ module.exports = function(grunt) {
         includes: [
           {
             src: './index-nocache.aspx',
-            dest: './deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/argos-saleslogix/index-nocache.aspx'
+            dest: './deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/typhon-crm/index-nocache.aspx'
           }, {
             src: './index.aspx',
-            dest: './deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/argos-saleslogix/index.aspx'
+            dest: './deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/typhon-crm/index.aspx'
         }],
       },
       'zh-TW': {
@@ -56,10 +56,10 @@ module.exports = function(grunt) {
         includes: [
           {
             src: './index-nocache.aspx',
-            dest: './deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/argos-saleslogix/index-nocache.aspx'
+            dest: './deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/typhon-crm/index-nocache.aspx'
           }, {
             src: './index.aspx',
-            dest: './deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/argos-saleslogix/index.aspx'
+            dest: './deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/typhon-crm/index.aspx'
         }],
       }
     },

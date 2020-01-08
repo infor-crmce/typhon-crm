@@ -97,7 +97,7 @@ class Application extends SDKApplication {
       'ChangeOpportunityRate',
       'LockOpportunityRate',
     ];
-    this.appName = 'argos-saleslogix';
+    this.appName = 'typhon-crm';
     this.serverVersion = {
       major: 8,
       minor: 0,

@@ -1,9 +1,9 @@
 {
-  "name": "argos-saleslogix",
+  "name": "typhon-crm",
   "version": "4.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Saleslogix/argos-saleslogix"
+    "url": "https://github.com/Saleslogix/typhon-crm"
   },
   "scripts": {
     "test": "yarn run build && grunt test",

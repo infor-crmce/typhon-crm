@@ -4,7 +4,7 @@ module.exports = function gruntClean(grunt) {
     css: ['min/css/**/*.css'],
     deploys: {
       options: {
-        // force to allow deleting outside our working directory (for argos-sdk)
+        // force to allow deleting outside our working directory (for typhon-sdk)
         force: true
       },
       src: ''

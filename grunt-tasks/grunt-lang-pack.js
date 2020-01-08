@@ -19,11 +19,11 @@ module.exports = function gruntLangPack(grunt) {
     var copyFilesConfig = grunt.config.get('copy.deploy');
     copyFilesConfig.files = [{
        src: '{help,localization}/locales/*/' + this.target + '/*',
-       dest: 'deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/argos-saleslogix/',
+       dest: 'deploy/bundle/model/Portal/SlxMobile/SourceFiles/products/typhon-crm/',
      }, {
        expand: true,
        cwd: '../../',
-       src: 'argos-sdk/localization/locales/*/' + this.target + '/*',
+       src: 'typhon-sdk/localization/locales/*/' + this.target + '/*',
        dest: 'deploy/bundle/model/Portal/SlxMobile/SourceFiles/',
     }];
 

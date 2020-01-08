@@ -35,8 +35,8 @@ content/dojo/dojo/selector/acme.js
 # application
 content/javascript/argos-amd-dependencies.js
 content/javascript/argos-dependencies.js
-content/javascript/argos-saleslogix.js
-content/javascript/argos-sdk.js
+content/javascript/typhon-crm.js
+content/javascript/typhon-sdk.js
 
 # environment
 configuration/development.js

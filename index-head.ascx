@@ -121,7 +121,7 @@
 </script>
 <script type="text/javascript" src="content/dojo/dojo-dependencies.js"></script>
 <script type="text/javascript" src="content/javascript/argos-amd-dependencies.js"></script>
-<script type="text/javascript" src="content/javascript/argos-sdk.js"></script>
+<script type="text/javascript" src="content/javascript/typhon-sdk.js"></script>
 
 <!-- Application -->
-<script type="text/javascript" src="content/javascript/argos-saleslogix.js"></script>
+<script type="text/javascript" src="content/javascript/typhon-crm.js"></script>

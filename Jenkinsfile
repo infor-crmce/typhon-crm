@@ -1,7 +1,7 @@
 #!groovy
 node('windows && nodejs') {
-  dir('argos-sdk') {
-    stage('Building argos-sdk') {
+  dir('typhon-sdk') {
+    stage('Building typhon-sdk') {
       clonesdk(env.BRANCH_NAME)
 
       dir('deploy') {
@@ -13,7 +13,7 @@ node('windows && nodejs') {
         bat 'yarn run lint'
         bat 'build\\release.cmd'
       } catch (err) {
-        slack.failure('Failed building argos-sdk')
+        slack.failure('Failed building typhon-sdk')
         throw err
       }
       dir('deploy') {
@@ -23,12 +23,12 @@ node('windows && nodejs') {
 
   }
 
-  dir('products/argos-saleslogix') {
-    stage ('Building argos-saleslogix') {
+  dir('products/typhon-crm') {
+    stage ('Building typhon-crm') {
       try {
         checkout scm
       } catch (err) {
-        slack.failure('Failed getting argos-saleslogix')
+        slack.failure('Failed getting typhon-crm')
         throw err
       }
 
@@ -42,7 +42,7 @@ node('windows && nodejs') {
         bat 'build\\release.cmd'
         //bat 'yarn run testbasic'
       } catch (err) {
-        slack.failure('Failed building argos-saleslogix')
+        slack.failure('Failed building typhon-crm')
         throw err
       }
 
@@ -90,12 +90,12 @@ void iiscopy(branch, build) {
 
 void clonesdk(branch, fallback='develop') {
   try {
-    git branch: "$branch", url: 'https://github.com/Saleslogix/argos-sdk.git'
+    git branch: "$branch", url: 'https://github.com/Saleslogix/typhon-sdk.git'
   } catch(err) {
     try {
-      git branch: "$fallback", url: 'https://github.com/Saleslogix/argos-sdk.git'
+      git branch: "$fallback", url: 'https://github.com/Saleslogix/typhon-sdk.git'
     } catch(er) {
-      slack.failure('Failed getting argos-sdk')
+      slack.failure('Failed getting typhon-sdk')
       throw er
     }
   }

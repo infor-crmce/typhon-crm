@@ -422,10 +422,10 @@ content/javascript/argos-amd-dependencies-debug.js
 content/javascript/argos-amd-dependencies.js
 content/javascript/argos-dependencies-debug.js
 content/javascript/argos-dependencies.js
-content/javascript/argos-saleslogix-debug.js
-content/javascript/argos-saleslogix.js
-content/javascript/argos-sdk-debug.js
-content/javascript/argos-sdk.js
+content/javascript/typhon-crm-debug.js
+content/javascript/typhon-crm.js
+content/javascript/typhon-sdk-debug.js
+content/javascript/typhon-sdk.js
 help/locales/crm/de/help.html
 help/locales/crm/en/help.html
 help/locales/crm/fr/help.html
