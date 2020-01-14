@@ -44,6 +44,8 @@ import ShipmentLineModule from './Modules/ShipmentLineModule';
 import ShipmentModule from './Modules/ShipmentModule';
 import ShipToAccountModule from './Modules/ShipToAccountModule';
 import ShipToModule from './Modules/ShipToModule';
+import PaymentModule from './Modules/PaymentModule';
+import PaymentDistributionModule from './Modules/PaymentDistributionModule';
 import RecentlyViewedList from '../../Views/RecentlyViewed/List';
 
 import './Models/SyncResult/Offline';
@@ -95,6 +97,8 @@ const __class = declare('crm.Integrations.BOE.ApplicationModule', [ApplicationMo
       new ShipmentModule(this),
       new ShipToAccountModule(this),
       new ShipToModule(this),
+      new PaymentModule(this),
+      new PaymentDistributionModule(this),
     ];
 
     this.modules.forEach((mod) => {

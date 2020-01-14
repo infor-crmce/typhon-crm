@@ -43,4 +43,6 @@ export default {
   SALESORDERITEM: 'SalesOrderItem',
   SYNCRESULT: 'SyncResult',
   UNITOFMEASURE: 'UnitOfMeasure',
+  PAYMENT: 'Payment',
+  PAYMENTDISTRIBUTION: 'PaymentDistribution',
 };

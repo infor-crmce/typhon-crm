@@ -79,6 +79,7 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
   erpNewSalesOrdersText: resource.erpNewSalesOrdersText,
   erpNewQuotesText: resource.erpNewQuotesText,
   erpOpenQuotesText: resource.erpOpenQuotesText,
+  paymentsText: resource.paymentsText,
 
   // Picklist Codes
   openCode: 'Open',
@@ -611,6 +612,34 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
           insert: true,
         });
       },
+      _onMakePaymentClick: function _onMakePaymentClick() {
+        const view = App.getView('payment_distribution_insert');
+        const data = { Account: {
+          $key: this.options.key,
+          $description: this.options.description,
+          AccountId: this.options.key,
+          AccountName: this.options.description,
+        } };
+        view.show({
+          fromContext: this,
+          entry: data,
+          insert: true,
+        });
+      },
+      _onTakePaymentClick: function _onTakePaymentClick() {
+        const view = App.getView('payment_insert');
+        const data = { Account: {
+          $key: this.options.key,
+          $description: this.options.description,
+          AccountId: this.options.key,
+          AccountName: this.options.description,
+        } };
+        view.show({
+          fromContext: this,
+          entry: data,
+          insert: true,
+        });
+      },
       hideBusy: function hideBusy() {
         if (this._busyIndicator) {
           this._busyIndicator.complete();
@@ -786,6 +815,18 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
         iconClass: 'cart',
         action: '_onAddOrderClick',
         security: 'Entities/SalesOrder/Add',
+      }, {
+        name: 'MakePayment',
+        label: 'Make Payment',
+        iconClass: 'cart',
+        action: '_onMakePaymentClick',
+        security: 'Entities/PaymentDistribution/Add',
+      }, {
+        name: 'TakePayment',
+        label: 'Take Payment',
+        iconClass: 'cart',
+        action: '_onTakePaymentClick',
+        security: 'Entities/Payment/Add',
       }],
     });
 
@@ -887,6 +928,13 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
             return `Account.Id eq "${entry.$key}"`;
           },
           view: 'account_erpinvoice_related',
+        }, {
+          name: 'PaymentsRelated',
+          label: this.paymentsText,
+          where: function where(entry) {
+            return `Account.Id eq "${entry.$key}"`;
+          },
+          view: 'payment_list',
         }, {
           name: 'ERPReceivablesRelated',
           label: this.erpReceivablesText,
