@@ -68,6 +68,8 @@ const __class = declare('crm.Views.Account.Detail', [Detail], {
   addNoteText: resource.addNoteText,
   calledText: resource.calledText,
   entityText: resource.entityText,
+  relatedSurveyTitleText: resource.relatedSurveyTitleText,
+  relatedSurveyText: resource.relatedSurveyText,
 
   // View Properties
   id: 'account_detail',
@@ -241,6 +243,12 @@ const __class = declare('crm.Views.Account.Detail', [Detail], {
         where: this.formatRelatedQuery.bindDelegate(this, 'accountId eq "${0}"'), // must be lower case because of feed
         view: 'account_attachment_related',
         title: this.relatedAttachmentTitleText,
+      }, {
+        name: 'AccountSurveyRelated',
+        label: this.relatedSurveyText,
+        where: this.formatRelatedQuery.bindDelegate(this, 'SurveyAccounts.AccountId eq "${0}"'), // must be lower case because of feed
+        view: 'surveyTake_list',
+        title: this.relatedSurveyTitleText,
       }],
     }]);
   },

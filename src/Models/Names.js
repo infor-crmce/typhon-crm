@@ -28,4 +28,11 @@ export default {
   USERACTIVITY: 'UserActivity',
   ADDRESS: 'Address',
   HISTORY: 'History',
+  SURVEY: 'Survey',
+  SURVEYQUESTION: 'SurveyQuestion',
+  SURVEYQUESTIONTYPE: 'SurveyQuestionType',
+  SURVEYPRODUCT: 'SurveyProduct',
+  SURVEYACCOUNT: 'SurveyAccount',
+  SURVEYANSWER: 'SurveyAnswer',
+  SURVEYHISTORY: 'SurveyHistory',
 };

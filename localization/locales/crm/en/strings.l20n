@@ -56,6 +56,8 @@
   moreDetailsText: "More Details"
   calledText: "Called ${0}"
   entityText: "Account"
+  relatedSurveyText: "Survey"
+  relatedSurveyTitleText: "Account Survey"
 >
 
 <accountEdit ""
@@ -96,6 +98,80 @@
   faxAbbreviationText: "Fax: "
   offlineText: "Offline"
 >
+
+<surveyList ""
+  titleText: "Surveys"
+  offlineText: "Offline"
+>
+<surveyEdit ""
+  descriptionText: "Description"
+  titleText: "Survey"
+>
+<surveyDetail ""
+  descriptionText: "Description"
+  titleText: "Survey"
+  relatedItemsText: "Related Items"
+  relatedQuestionsText: "Questions"
+  relatedProductText: "Products"
+>
+
+<surveyProductList ""
+  titleText: "Survey Product"
+  offlineText: "Offline"
+>
+<surveyProductEdit ""
+  surveyText: "Survey"
+  titleText: "Survey Product"
+  productText: "Product"
+>
+<surveyProductDetail ""
+  surveyText: "Survey"
+  titleText: "Survey Product"
+  relatedItemsText: "Related Items"
+  productText: "Product"
+>
+
+<surveyAccountDetail ""
+  titleText: "Account Survey"
+  accountText: "Account"
+  surveyText: "Survey"
+>
+<surveyAccountEdit ""
+  titleText: "Account Survey"
+  accountText: "Account"
+  surveyText: "Survey"
+>
+<surveyQuestionDetail ""
+  titleText: "Survey Question"
+  questionText: "Question"
+  offlineText: "Offline"
+  relatedItemsText: "Related Items"
+>
+<surveyQuestionList ""
+  titleText: "Survey Question"
+  questionText: "Question"
+  offlineText: "Offline"
+>
+<surveyQuestionEdit ""
+  questionText: "Question"
+  titleText: "Survey Question"
+  surveyText: "Survey"
+  questionTypeText: "Question Type"
+>
+<surveyTake ""
+  questionText: "Question"
+  titleText: "Choose Survey to Attempt"
+  surveyText: "Survey"
+  questionTypeText: "Question Type"
+>
+
+<surveyTakeInsert ""
+  questionText: "Question"
+  titleText: "Survey Record"
+  surveyText: "Survey"
+  questionTypeText: "Question Type"
+>
+
 
 <activityComplete ""
   activityInfoText: "Activity Info"

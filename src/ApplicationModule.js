@@ -45,6 +45,28 @@ import TextEdit from './Views/TextEdit';
 import AccountList from './Views/Account/List';
 import AccountDetail from './Views/Account/Detail';
 import AccountEdit from './Views/Account/Edit';
+
+import SurveyList from './Views/Survey/List';
+import SurveyDetail from './Views/Survey/Detail';
+import SurveyEdit from './Views/Survey/Edit';
+
+import SurveyQuestionList from './Views/SurveyQuestion/List';
+import SurveyQuestionDetail from './Views/SurveyQuestion/Detail';
+import SurveyQuestionEdit from './Views/SurveyQuestion/Edit';
+
+import SurveyQuestionTypeList from './Views/SurveyQuestionType/List';
+
+import SurveyProductList from './Views/SurveyProduct/List';
+import SurveyProductDetail from './Views/SurveyProduct/Detail';
+import SurveyProductEdit from './Views/SurveyProduct/Edit';
+
+import SurveyAccountList from './Views/SurveyAccount/List';
+import SurveyAccountDetail from './Views/SurveyAccount/Detail';
+import SurveyAccountEdit from './Views/SurveyAccount/Edit';
+
+import SurveyTakeList from './Views/SurveyTake/List';
+import SurveyTakeEdit from './Views/SurveyTake/Edit';
+
 import AddressList from './Views/Address/List';
 import AddressEdit from './Views/Address/Edit';
 import ActivityList from './Views/Activity/List';
@@ -136,6 +158,28 @@ import './Environment';
 import './Utility';
 import './Models/Account/Offline';
 import './Models/Account/SData';
+
+import './Models/Survey/Offline';
+import './Models/Survey/SData';
+
+import './Models/SurveyQuestion/Offline';
+import './Models/SurveyQuestion/SData';
+
+import './Models/SurveyAccount/Offline';
+import './Models/SurveyAccount/SData';
+
+import './Models/SurveyQuestionType/Offline';
+import './Models/SurveyQuestionType/SData';
+
+import './Models/SurveyProduct/Offline';
+import './Models/SurveyProduct/SData';
+
+import './Models/SurveyAnswer/Offline';
+import './Models/SurveyAnswer/SData';
+
+import './Models/SurveyHistory/Offline';
+import './Models/SurveyHistory/SData';
+
 import './Models/Activity/Offline';
 import './Models/Activity/SData';
 import './Models/Contact/Offline';
@@ -234,6 +278,46 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
       },
     }));
     this.registerView(new AddressEdit());
+
+
+    this.registerView(new SurveyList());
+    this.registerView(new SurveyDetail());
+    this.registerView(new SurveyEdit());
+
+    this.registerView(new SurveyQuestionList());
+    this.registerView(new SurveyQuestionDetail());
+    this.registerView(new SurveyQuestionEdit());
+
+    this.registerView(new SurveyProductList());
+    this.registerView(new SurveyProductDetail());
+    this.registerView(new SurveyProductEdit());
+
+    this.registerView(new SurveyTakeList());
+    this.registerView(new SurveyTakeEdit());
+
+    this.registerView(new SurveyList({
+      id: 'survey_related',
+      expose: false,
+      groupsEnabled: false,
+      defaultSearchTerm: () => {
+        return '';
+      },
+    }));
+
+    this.registerView(new SurveyQuestionTypeList());
+
+    this.registerView(new SurveyQuestionList({
+      id: 'surveyQuestion_related',
+      expose: false,
+      groupsEnabled: false,
+      defaultSearchTerm: () => {
+        return '';
+      },
+    }));
+
+    this.registerView(new SurveyAccountList());
+    this.registerView(new SurveyAccountEdit());
+    this.registerView(new SurveyAccountDetail());
 
     this.registerView(new AccountList({
       canRedirectTo: true,
