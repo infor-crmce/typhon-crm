@@ -38,6 +38,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Detail', [Detail], /
   descriptionLabelText: resource.descriptionLabelText,
   addDistributionActionText: resource.addDistributionActionText,
   amountLabelText: resource.amountLabelText,
+  applyPaymentActionText: resource.applyPaymentActionText,
 
   editView: 'payment_edit',
   insertView: 'payment_insert',
@@ -55,9 +56,16 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Detail', [Detail], /
       name: 'QuickActionsSection',
       children: [{
         id: 'addDistribution',
+        iconClass: 'expense-report',
         label: this.addDistributionActionText,
         enabled: true,
         action: 'onAddDistributionClick',
+      }, {
+        id: 'applyPayment',
+        iconClass: 'finance',
+        label: this.applyPaymentActionText,
+        enabled: true,
+        action: 'onApplyPaymentClick',
       }],
     }, {
       title: this.detailsText,
