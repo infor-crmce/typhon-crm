@@ -613,31 +613,27 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
         });
       },
       _onAddDistributionClick: function _onAddDistributionClick() {
-        const view = App.getView('payment_distribution_insert');
-        const data = { Account: {
-          $key: this.options.key,
-          $description: this.options.description,
-          AccountId: this.options.key,
-          AccountName: this.options.description,
-        } };
+        const view = App.getView('account_payment_distribution_insert');
+        const source = this.options && this.options.source;
+        const entry = { Account: this.entry };
+
         view.show({
-          fromContext: this,
-          entry: data,
           insert: true,
+          fromContext: this,
+          entry,
+          source,
         });
       },
       _onAddPaymentClick: function _onAddPaymentClick() {
-        const view = App.getView('payment_insert');
-        const data = { Account: {
-          $key: this.options.key,
-          $description: this.options.description,
-          AccountId: this.options.key,
-          AccountName: this.options.description,
-        } };
+        const view = App.getView('account_payment_insert');
+        const source = this.options && this.options.source;
+        const entry = { Account: this.entry };
+
         view.show({
-          fromContext: this,
-          entry: data,
           insert: true,
+          fromContext: this,
+          entry,
+          source,
         });
       },
       hideBusy: function hideBusy() {

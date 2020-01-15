@@ -40,6 +40,19 @@ const __class = declare('crm.Integrations.BOE.Modules.Payment', [_Module], {
       inserting: true,
       expose: false,
     }));
+    am.registerView(new PaymentEdit({
+      id: 'account_payment_insert',
+      inserting: true,
+      expose: false,
+      accountLookupWhere: (entry, scope) => {
+        let accountID = entry && entry.Account && entry.Account.$key && entry.Account.AccountID;
+        if (!accountID && scope.options && scope.options.entry && (scope.options.entry.Account.$key || scope.options.entry.Account.AccountID)) {
+          accountID = scope.options.entry.Account.$key;
+        }
+
+        return !accountID ? '' : `$key eq '${accountID}'`;
+      },
+    }));
     am.registerView(new PaymentDetail({
       expose: false,
       onAddDistributionClick: function onAddDistributionClick() {

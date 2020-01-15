@@ -59,6 +59,8 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
       $resources: list,
     };
   },
+  paymentLookupWhere: () => '',
+  invoiceLookupWhere: () => '',
   createLayout: function createLayout() {
     return this.layout || (this.layout = [{
       title: this.actionsText,
@@ -79,6 +81,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
         required: true,
         valueTextProperty: 'Payment.PaymentId',
         view: 'distribution_payment',
+        where: entry => this.paymentLookupWhere(entry, this),
       }, {
         name: 'ErpInvoice',
         property: 'ERPInvoice',
@@ -89,6 +92,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
         valueTextProperty: 'ERPInvoice.InvoiceNumber',
         default: '',
         view: 'payment_distribution_invoice',
+        where: entry => this.invoiceLookupWhere(entry, this),
       }, {
         name: 'Seccode',
         property: 'SecCodeID',

@@ -36,6 +36,26 @@ const __class = declare('crm.Integrations.BOE.Modules.PaymentDistribution', [_Mo
       id: 'payment_distribution_insert',
       inserting: true,
     }));
+    am.registerView(new PaymentDistributionEdit({
+      id: 'account_payment_distribution_insert',
+      inserting: true,
+      paymentLookupWhere: (entry, scope) => {
+        let accountID = entry && entry.Account && entry.Account.$key && entry.Account.AccountID;
+        if (!accountID && scope.options && scope.options.entry && (scope.options.entry.Account.$key || scope.options.entry.Account.AccountID)) {
+          accountID = scope.options.entry.Account.$key;
+        }
+
+        return !accountID ? '' : `Account.$key eq '${accountID}'`;
+      },
+      invoiceLookupWhere: (entry, scope) => {
+        let accountID = entry && entry.Account && entry.Account.$key && entry.Account.AccountID;
+        if (!accountID && scope.options && scope.options.entry && (scope.options.entry.Account.$key || scope.options.entry.Account.AccountID)) {
+          accountID = scope.options.entry.Account.$key;
+        }
+
+        return !accountID ? '' : `Account.$key eq '${accountID}'`;
+      },
+    }));
 
     am.registerView(new PaymentDistributionDetail());
     am.registerView(new PaymentDistributionList({

@@ -69,6 +69,9 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
       $resources: list,
     };
   },
+  accountLookupWhere: function accountLookupWhere() {
+    return '';
+  },
   createLayout: function createLayout() {
     return this.layout || (this.layout = [{
       title: this.actionsText,
@@ -89,6 +92,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
         required: true,
         valueTextProperty: 'Account.AccountName',
         view: 'account_payments',
+        where: entry => this.accountLookupWhere(entry, this),
       }, {
         name: 'Type',
         property: 'Type',
