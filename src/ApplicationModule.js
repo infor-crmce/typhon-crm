@@ -132,6 +132,7 @@ import CalendarAccessList from './Views/User/CalendarAccessList';
 import UserList from './Views/User/List';
 import ViewAttachment from './Views/Attachment/ViewAttachment';
 import AttachmentList from './Views/Attachment/List';
+import AttachmentOfflineList from './Views/Attachment/OfflineList';
 import AddAttachment from './Views/Attachment/AddAttachment';
 import MyAttachmentList from './Views/Attachment/MyAttachmentList';
 import RecentlyViewedList from './Views/RecentlyViewed/List';
@@ -576,6 +577,7 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
     this.registerView(new ViewAttachment());
     this.registerView(new AddAttachment());
     this.registerView(new MyAttachmentList());
+    this.registerView(new AttachmentOfflineList());
     this.registerView(new AttachmentList({
       id: 'account_attachment_related',
       expose: false,
