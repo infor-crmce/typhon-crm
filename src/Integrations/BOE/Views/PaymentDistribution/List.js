@@ -20,7 +20,6 @@ import List from 'argos/List';
 import format from 'crm/Format';
 import _RightDrawerListMixin from 'crm/Views/_RightDrawerListMixin';
 import _MetricListMixin from 'crm/Views/_MetricListMixin';
-// import _GroupListMixin from 'crm/Views/_GroupListMixin';
 import MODEL_NAMES from '../../Models/Names';
 import utility from '../../Utility';
 import getResource from 'argos/I18n';

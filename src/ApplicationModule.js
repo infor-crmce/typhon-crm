@@ -445,7 +445,6 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
         return '';
       },
     }));
-
     this.registerView(new TicketProductsEdit());
 
     this.registerView(new OpportunityProductList({
