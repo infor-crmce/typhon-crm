@@ -128,9 +128,8 @@ const __class = declare('crm.Views.SurveyTake.Edit', [Edit], {
     });
     return deferred;
   },
-  _prepareLayout: function _prepareLayout(data) {
+  _prepareLayout: function _prepareLayout() {
     this._rowLayout();
-    console.log(data);
 
     $('div[data-field]', this.contentNode).each((i, node) => {
       const name = $(node).attr('data-field');
@@ -304,7 +303,7 @@ const __class = declare('crm.Views.SurveyTake.Edit', [Edit], {
         deferred.resolve(data.$key);
       },
       failure: () => {
-        console.log('record did not save');
+        console.log('record did not save'); // eslint-disable-line
       },
       scope: this,
     });

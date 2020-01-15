@@ -49,16 +49,6 @@ const __class = declare('crm.Models.Product.SData', [Base, _SDataModelBase], {
       ],
     }];
   },
-  // getEntry: function getEntry(/* options */) {
-  //    const results$ = this.inherited(arguments);
-  //    return results$.then((entry) => {
-  //        return new Promise((resolve) => {
-  //            App.picklistService.requestPicklist(`Account ${entry.Type}`).then(() => {
-  //                resolve(entry);
-  //            });
-  //        });
-  //    });
-  // },
 });
 
 Manager.register(MODEL_NAMES.PRODUCT, MODEL_TYPES.SDATA, __class);
