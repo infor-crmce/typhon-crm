@@ -16,6 +16,8 @@
 import declare from 'dojo/_base/declare';
 import List from 'argos/List';
 import getResource from 'argos/I18n';
+import _ListOfflineMixin from 'argos/Offline/_ListOfflineMixin';
+import MODEL_NAMES from '../../Models/Names';
 
 const resource = getResource('productList');
 
@@ -26,7 +28,7 @@ const resource = getResource('productList');
  *
  * @requires crm.Format
  */
-const __class = declare('crm.Views.Product.List', [List], {
+const __class = declare('crm.Views.Product.List', [List, _ListOfflineMixin], {
   // Templates
   itemTemplate: new Simplate([
     '<p class="listview-heading">{%: $.Name %} | {%: $.Description %}</p>',
@@ -37,9 +39,11 @@ const __class = declare('crm.Views.Product.List', [List], {
 
   // Localization
   titleText: resource.titleText,
+  modelName: MODEL_NAMES.PRODUCT,
 
   // View Properties
-  id: 'product_list',
+    id: 'product_related',
+    detailView: 'product_detail',
   security: 'Entities/Product/View',
   queryOrderBy: 'Name',
   querySelect: [
@@ -50,8 +54,35 @@ const __class = declare('crm.Views.Product.List', [List], {
     'Program',
     'FixedCost',
   ],
-  resourceKind: 'products',
+    resourceKind: 'products',
+    entityName: 'Product',
+    briefcaseAdded: false,
+    createToolLayout: function createToolLayout() {
+        this.inherited(arguments);
 
+        if (this.tools && this.tools.tbar && !this.briefcaseAdded && !window.App.supportsTouch()) {
+            this.tools.tbar.push({
+                id: 'briefCase',
+                svg: 'roles',
+                title: 'Briefcase',
+                action: 'briefCaseList',
+                security: ''
+            });
+            this.briefcaseAdded = true;
+        }
+
+        if (this.tools && this.tools.tbar && !this._refreshAdded && !window.App.supportsTouch()) {
+            this.tools.tbar.push({
+                id: 'refresh',
+                svg: 'refresh',
+                action: '_refreshClicked',
+            });
+
+            this._refreshAdded = true;
+        }
+
+        return this.tools;
+    },
   formatSearchQuery: function formatSearchQuery(searchQuery) {
     const q = this.escapeSearchQuery(searchQuery.toUpperCase());
     return `(upper(Name) like "${q}%" or upper(Family) like "${q}%")`;

@@ -35,4 +35,6 @@ export default {
   SURVEYACCOUNT: 'SurveyAccount',
   SURVEYANSWER: 'SurveyAnswer',
   SURVEYHISTORY: 'SurveyHistory',
+  PRODUCT:'Product'
+
 };
