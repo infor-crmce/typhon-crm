@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable func-names */
 /* Copyright 2017 Infor
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -92,19 +94,19 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
   uploadOfflineFile: function uploadFile(fileName, url, progress, complete, error, scope, asPut) {
     // this.uploadFileHTML5(file, url, progress, complete, error, scope, asPut);
     const indexdbRequest = indexedDB.open('dataFiles', '1.0');
-    indexdbRequest.onsuccess = function (e) {
+    indexdbRequest.onsuccess = function () {
       const indexdb = indexdbRequest.result;
       const readWriteMode = typeof IDBTransaction.READ_WRITE === 'undefined' ? 'readwrite' : IDBTransaction.READ_WRITE;
       const transaction = indexdb.transaction(['files'], readWriteMode);
       const objectStore = transaction.objectStore('files');
 
       // Get a single item
-      const request = objectStore.get(fileName);// "1KB.bin"
-      request.onerror = function (e) {
+      const req = objectStore.get(fileName);// "1KB.bin"
+      req.onerror = function (e) {
         console.log('error storing data');
-        console.log(event);
+        console.log(e);
       };
-      request.onsuccess = function (e) {
+      req.onsuccess = function (e) {
         console.log('Got the offline file ');
         const request = new XMLHttpRequest();
         const service = App.getService();
@@ -174,27 +176,27 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
         console.log('error storing data');
         console.error(e);
       };
-      transaction.oncomplete = function (e) {
+      transaction.oncomplete = function () {
         complete.call(scope || context, null);
         console.log('data stored');
       };// Done
     };
 
-    request.onerror = function (event) {
+    request.onerror = function () {
       console.log('Error creating/accessing IndexedDB database');
     };
 
-    request.onsuccess = function (event) {
+    request.onsuccess = function () {
       console.log('Success creating/accessing IndexedDB database');
       db = request.result;
 
-      db.onerror = function (event) {
+      db.onerror = function () {
         console.log('Error creating/accessing IndexedDB database');
       };
 
       // Interim solution for Google Chrome to create an objectStore. Will be deprecated
       if (db.setVersion) {
-        if (db.version != dbVersion) {
+        if (db.version !== dbVersion) {
           const setVersion = db.setVersion(dbVersion);
           setVersion.onsuccess = function () {
             createObjectStore(db);
@@ -320,7 +322,6 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
 
     _uploadFileHTML5_asBinary: function _uploadFileHTML5_asBinary(file, _url, progress, complete, error, scope, asPut) {// eslint-disable-line
     const context = this;
-    const service = App.getService();
     window.BlobBuilder = window.BlobBuilder ||
             window.WebKitBlobBuilder ||
             window.MozBlobBuilder ||
@@ -328,7 +329,6 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
 
     const reader = new FileReader();
     reader.onload = lang.hitch(this, function readerOnLoad(evt) {
-      const unknownErrorText = this.unknownErrorText;
       const blobReader = new FileReader(); // read the blob as an ArrayBuffer to work around this android issue: https://code.google.com/p/android/issues/detail?id=39882
       let bb;
       let usingBlobBuilder;

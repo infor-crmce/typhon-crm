@@ -17,9 +17,9 @@ import declare from 'dojo/_base/declare';
 import validator from '../../Validator';
 import Edit from 'argos/Edit';
 import Utility from 'argos/Utility';
-import getResource from 'argos/I18n';
+// import getResource from 'argos/I18n';
 
-const resource = getResource('ticketProductEdit');
+// const resource = getResource('ticketProductEdit');
 
 /**
  * @class crm.Views.OpportunityProduct.Edit
