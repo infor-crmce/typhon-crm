@@ -44,7 +44,6 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.List', [
   amountLabelText: resource.amountLabelText,
   distributionDateLabelText: resource.distributionDateLabelText,
   paymentLabelText: resource.paymentLabelText,
-  amountLabelText: resource.amountLabelText,
   invoiceLabelText: resource.invoiceLabelText,
 
   // View Properties

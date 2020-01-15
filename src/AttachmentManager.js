@@ -55,7 +55,7 @@ const __class = declare('crm.AttachmentManager', null, /** @lends crm.Attachment
   /**
    * @param {Array} files
    */
-  createAttachments: function createAttachments() {},
+  createAttachments: function createAttachments() { },
   createAttachment: function createAttachment(file, mixin) {
     if (!mixin.hasOwnProperty('description')) {
       mixin.description = this._getDefaultDescription(file.name);
@@ -79,7 +79,7 @@ const __class = declare('crm.AttachmentManager', null, /** @lends crm.Attachment
       this._attachmentTemplate = template;
       this.uploadFiles();
     },
-    this.onRequestTemplateFailure
+      this.onRequestTemplateFailure
     );
   },
   getAttachmentUrl: function getAttachmentUrl(attachmentId) {
@@ -238,7 +238,7 @@ const __class = declare('crm.AttachmentManager', null, /** @lends crm.Attachment
       });
     }
   },
-  onRequestTemplateFailure: function onRequestTemplateFailure() {},
+  onRequestTemplateFailure: function onRequestTemplateFailure() { },
   onRequestTemplateSuccess: function onRequestTemplateSuccess(entry) {
     this.processTemplateEntry(entry);
   },
@@ -267,7 +267,7 @@ const __class = declare('crm.AttachmentManager', null, /** @lends crm.Attachment
    * @param response
    * @param o
    */
-  onRequestDataFailure: function onRequestDataFailure() {},
+  onRequestDataFailure: function onRequestDataFailure() { },
   uploadFiles: function uploadFiles() {
     this._isUploading = true;
     this._fileCount = this._files.length;
@@ -283,8 +283,10 @@ const __class = declare('crm.AttachmentManager', null, /** @lends crm.Attachment
   },
   onSuccessUpload: function onSuccessUpload(request) {
     // the id of the new attachment is buried in the Location response header...
-      if (request == null)
-          return;
+    if (request == null) {
+      return;
+    }
+
     const url = request.getResponseHeader('Location');
     const re = /'\w+'/g;
     const matches = url.match(re);
@@ -326,7 +328,7 @@ const __class = declare('crm.AttachmentManager', null, /** @lends crm.Attachment
   /**
    * @param attachment
    */
-  onSuccessUpdate: function onSuccessUpdate() {},
+  onSuccessUpdate: function onSuccessUpdate() { },
   onFailedUpdate: function onFailedUpdate(resp) {
     const err = new Error('Failed to update.');
     err.resp = resp;
@@ -335,7 +337,7 @@ const __class = declare('crm.AttachmentManager', null, /** @lends crm.Attachment
   /**
    * @param percent
    */
-  onUpdateProgress: function onUpdateProgress() {},
+  onUpdateProgress: function onUpdateProgress() { },
   _updateProgress: function _updateProgress(curFileProgress) {
     let pct = this._totalProgress;
 

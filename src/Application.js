@@ -134,7 +134,7 @@ class Application extends SDKApplication {
       'myattachment_list',
       'recently_viewed_list',
       'briefcase_list',
-	  'attachment_offlinelist',
+      'attachment_offlinelist',
     ];
 
     // Settings
@@ -268,7 +268,7 @@ class Application extends SDKApplication {
       if (window.localStorage) {
         window.localStorage.setItem('navigationState', JSON.stringify(ReUI.context.history));
       }
-    } catch (e) {} // eslint-disable-line
+    } catch (e) { } // eslint-disable-line
   }
   hasMultiCurrency() {
     // Check if the configuration specified multiCurrency, this will override the dynamic check.
@@ -421,7 +421,7 @@ class Application extends SDKApplication {
             endpoint: credentials.endpoint,
           })));
         }
-      } catch (e) {} //eslint-disable-line
+      } catch (e) { } //eslint-disable-line
     }
 
     if (callback) {
@@ -523,7 +523,7 @@ class Application extends SDKApplication {
         const encoded = stored && Base64.decode(stored);
         credentials = encoded && JSON.parse(encoded);
       }
-    } catch (e) {} //eslint-disable-line
+    } catch (e) { } //eslint-disable-line
 
     return credentials;
   }
@@ -544,7 +544,7 @@ class Application extends SDKApplication {
 
         this.store.dispatch(setEndPoint(results));
       }
-    } catch (e) {} // eslint-disable-line
+    } catch (e) { } // eslint-disable-line
   }
   saveEndpoint(url = '') {
     if (!url) {
@@ -555,14 +555,14 @@ class Application extends SDKApplication {
       if (window.localStorage) {
         window.localStorage.setItem('endpoint', url);
       }
-    } catch (e) {} // eslint-disable-line
+    } catch (e) { } // eslint-disable-line
   }
   removeCredentials() {
     try {
       if (window.localStorage) {
         window.localStorage.removeItem('credentials');
       }
-    } catch (e) {} //eslint-disable-line
+    } catch (e) { } //eslint-disable-line
   }
   handleAuthentication() {
     const credentials = this.getCredentials();
@@ -690,14 +690,14 @@ class Application extends SDKApplication {
       if (window.localStorage) {
         window.localStorage.removeItem('navigationState');
       }
-    } catch (e) {} //eslint-disable-line
+    } catch (e) { } //eslint-disable-line
   }
   _loadNavigationState() {
     try {
       if (window.localStorage) {
         this.navigationState = window.localStorage.getItem('navigationState');
       }
-    } catch (e) {} // eslint-disable-line
+    } catch (e) { } // eslint-disable-line
   }
   _saveDefaultPreferences() {
     if (this.preferences) {
