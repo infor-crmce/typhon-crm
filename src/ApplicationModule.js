@@ -293,6 +293,15 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
     this.registerView(new SurveyProductEdit());
 
     this.registerView(new SurveyTakeList());
+    this.registerView(new SurveyTakeList({
+      id: 'surveyTake_related',
+      expose: false,
+      groupsEnabled: false,
+      defaultSearchTerm: () => {
+        return '';
+      },
+    }));
+
     this.registerView(new SurveyTakeEdit());
 
     this.registerView(new SurveyList({

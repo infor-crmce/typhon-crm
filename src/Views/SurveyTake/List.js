@@ -83,6 +83,7 @@ const __class = declare('crm.Views.SurveyTake.List', [List, _RightDrawerListMixi
     const options = {
       key,
       accountId: this.options.where && this.options.where.split(' ').length > 2 ? this.options.where.split(' ')[2].replace('"', '').replace('"', '') : null,
+      title: selection.data.Description,
       selectedEntry: selection.data,
       fromContext: this,
       insert: true,
