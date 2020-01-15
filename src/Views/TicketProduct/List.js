@@ -15,7 +15,7 @@
 
 import declare from 'dojo/_base/declare';
 import List from 'argos/List';
-import getResource from 'argos/I18n';
+// import getResource from 'argos/I18n';
 
 // const resource = getResource('TicketProductList');
 

@@ -120,12 +120,11 @@ const __class = declare('crm.Views.Attachment.OfflineList', [List, _RightDrawerL
     }]);
   },
   navigateToEditView: function navigateToEditView(action, selection) {
-    console.log('action: save to inforcrm');
     const service = App.getService(this.serviceName);
     const baseUrl = utility.stripQueryArgs(service.getUri().toString());
     this._fileManager.uploadOfflineFile(selection.data.fileName, baseUrl, null, null, null, null, null);
   },
-  deleteNote: function deleteNote(action, selection) {
+  deleteNote: function deleteNote() {
 
   },
   hashTagQueriesText: {
