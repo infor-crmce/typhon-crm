@@ -168,10 +168,10 @@
 <surveyTakeInsert ""
   questionText: "Question"
   titleText: "Survey Record"
+  accountText: "Account"
   surveyText: "Survey"
   questionTypeText: "Question Type"
 >
-
 
 <activityComplete ""
   activityInfoText: "Activity Info"

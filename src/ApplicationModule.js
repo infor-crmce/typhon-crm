@@ -132,12 +132,16 @@ import CalendarAccessList from './Views/User/CalendarAccessList';
 import UserList from './Views/User/List';
 import ViewAttachment from './Views/Attachment/ViewAttachment';
 import AttachmentList from './Views/Attachment/List';
+import AttachmentOfflineList from './Views/Attachment/OfflineList';
 import AddAttachment from './Views/Attachment/AddAttachment';
 import MyAttachmentList from './Views/Attachment/MyAttachmentList';
 import RecentlyViewedList from './Views/RecentlyViewed/List';
 import BriefcaseList from './Views/Briefcase/List';
 import OfflineOptionsEdit from './Views/OfflineOptions/Edit';
 import LanguageOptionsEdit from './Views/LanguageOptions/Edit';
+import TicketProductsEdit from './Views/TicketProduct/Edit';
+import TicketProductList from './Views/TicketProduct/List';
+
 import getResource from 'argos/I18n';
 import MODEL_NAMES from './Models/Names';
 import MODEL_TYPES from 'argos/Models/Types';
@@ -293,6 +297,15 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
     this.registerView(new SurveyProductEdit());
 
     this.registerView(new SurveyTakeList());
+    this.registerView(new SurveyTakeList({
+      id: 'surveyTake_related',
+      expose: false,
+      groupsEnabled: false,
+      defaultSearchTerm: () => {
+        return '';
+      },
+    }));
+
     this.registerView(new SurveyTakeEdit());
 
     this.registerView(new SurveyList({
@@ -431,7 +444,8 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
       defaultSearchTerm: () => {
         return '';
       },
-    }));
+    })); 
+      this.registerView(new TicketProductsEdit());
 
     this.registerView(new OpportunityProductList({
       id: 'opportunityproduct_related',
@@ -494,6 +508,7 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
         return '';
       },
     }));
+      this.registerView(new TicketProductList());
 
     this.registerView(new TicketActivityItemList());
     this.registerView(new TicketActivityItemDetail());
@@ -576,6 +591,7 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
     this.registerView(new ViewAttachment());
     this.registerView(new AddAttachment());
     this.registerView(new MyAttachmentList());
+    this.registerView(new AttachmentOfflineList());
     this.registerView(new AttachmentList({
       id: 'account_attachment_related',
       expose: false,

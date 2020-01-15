@@ -194,6 +194,16 @@ const __class = declare('crm.Views.Ticket.Detail', [Detail], {
         where: this.formatRelatedQuery.bindDelegate(this, 'ticketId eq "${0}"'), // must be lower case because of feed
         view: 'ticket_attachment_related',
         title: this.relatedAttachmentTitleText,
+      }, {
+        name: 'ProductRelated',
+        label: 'Products',
+        view: 'ticketproduct_list',
+        where: this.formatRelatedQuery.bindDelegate(this, 'Ticket.Id eq "${0}"'),
+      }, {
+        name: 'ReturnRelated',
+        label: 'Returns',
+        view: 'ticketproduct_list',//'ticketreturn_related', ToDo
+        where: this.formatRelatedQuery.bindDelegate(this, 'Ticket.Id eq "${0}"'),
       }],
     }]);
   },

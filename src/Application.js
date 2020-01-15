@@ -134,6 +134,7 @@ class Application extends SDKApplication {
       'myattachment_list',
       'recently_viewed_list',
       'briefcase_list',
+	  'attachment_offlinelist',
     ];
 
     // Settings
