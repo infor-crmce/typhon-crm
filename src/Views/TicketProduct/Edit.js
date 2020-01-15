@@ -35,30 +35,30 @@ const __class = declare('crm.Views.TicketProduct.Edit', [Edit], {
 
 
   // View Properties
-    entityName: 'ticketProducts',
-    id: 'ticketProducts_edit',
-    resourceKind: 'ticketAccountProducts',
+  entityName: 'ticketProducts',
+  id: 'ticketProducts_edit',
+  resourceKind: 'ticketAccountProducts',
   querySelect: [
-    //'ActualId',
+    // 'ActualId',
     'ProductName',
-    //'SerialNumber'
+    // 'SerialNumber'
 
 
-      //'Opportunity/Description',
-      //'Product/Name',
-      //'Product/Family',
-      //'Program',
-      //'Price',
-      //'Discount',
-      //'AdjustedPrice',
-      //'CalculatedPrice',
-      //'Quantity',
-      //'ExtendedPrice',
+    // 'Opportunity/Description',
+    // 'Product/Name',
+    // 'Product/Family',
+    // 'Program',
+    // 'Price',
+    // 'Discount',
+    // 'AdjustedPrice',
+    // 'CalculatedPrice',
+    // 'Quantity',
+    // 'ExtendedPrice',
   ],
   queryInclude: [
     '$permissions',
   ],
-  
+
   applyContext: function applyContext() {
     const entry = this.options && this.options.selectedEntry;
 
@@ -84,10 +84,10 @@ const __class = declare('crm.Views.TicketProduct.Edit', [Edit], {
       this._updateExtendedPrice();
     }
   },
-  //onInsertCompleted: function onInsertCompleted() {
+  // onInsertCompleted: function onInsertCompleted() {
   //  this._refreshOpportunityViews();
   //  this.inherited(arguments);
-  //},
+  // },
   _refreshOpportunityViews: function _refreshOpportunityViews() {
     const views = [
       App.getView('opportunityproduct_related'),

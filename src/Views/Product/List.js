@@ -42,8 +42,8 @@ const __class = declare('crm.Views.Product.List', [List, _ListOfflineMixin], {
   modelName: MODEL_NAMES.PRODUCT,
 
   // View Properties
-    id: 'product_related',
-    detailView: 'product_detail',
+  id: 'product_related',
+  detailView: 'product_detail',
   security: 'Entities/Product/View',
   queryOrderBy: 'Name',
   querySelect: [
@@ -54,35 +54,35 @@ const __class = declare('crm.Views.Product.List', [List, _ListOfflineMixin], {
     'Program',
     'FixedCost',
   ],
-    resourceKind: 'products',
-    entityName: 'Product',
-    briefcaseAdded: false,
-    createToolLayout: function createToolLayout() {
-        this.inherited(arguments);
+  resourceKind: 'products',
+  entityName: 'Product',
+  briefcaseAdded: false,
+  createToolLayout: function createToolLayout() {
+    this.inherited(arguments);
 
-        if (this.tools && this.tools.tbar && !this.briefcaseAdded && !window.App.supportsTouch()) {
-            this.tools.tbar.push({
-                id: 'briefCase',
-                svg: 'roles',
-                title: 'Briefcase',
-                action: 'briefCaseList',
-                security: ''
-            });
-            this.briefcaseAdded = true;
-        }
+    if (this.tools && this.tools.tbar && !this.briefcaseAdded && !window.App.supportsTouch()) {
+      this.tools.tbar.push({
+        id: 'briefCase',
+        svg: 'roles',
+        title: 'Briefcase',
+        action: 'briefCaseList',
+        security: '',
+      });
+      this.briefcaseAdded = true;
+    }
 
-        if (this.tools && this.tools.tbar && !this._refreshAdded && !window.App.supportsTouch()) {
-            this.tools.tbar.push({
-                id: 'refresh',
-                svg: 'refresh',
-                action: '_refreshClicked',
-            });
+    if (this.tools && this.tools.tbar && !this._refreshAdded && !window.App.supportsTouch()) {
+      this.tools.tbar.push({
+        id: 'refresh',
+        svg: 'refresh',
+        action: '_refreshClicked',
+      });
 
-            this._refreshAdded = true;
-        }
+      this._refreshAdded = true;
+    }
 
-        return this.tools;
-    },
+    return this.tools;
+  },
   formatSearchQuery: function formatSearchQuery(searchQuery) {
     const q = this.escapeSearchQuery(searchQuery.toUpperCase());
     return `(upper(Name) like "${q}%" or upper(Family) like "${q}%")`;

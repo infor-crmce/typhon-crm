@@ -21,44 +21,44 @@ import MODEL_TYPES from 'argos/Models/Types';
 import MODEL_NAMES from '../Names';
 
 const __class = declare('crm.Models.Product.SData', [Base, _SDataModelBase], {
-    id: 'product_sdata_model',
-    createQueryModels: function createQueryModels() {
-        return [{
-            name: 'list',
-            queryOrderBy: '',
-            querySelect: [
-                'Description',
-                'Name',
-                'Family',
-                'Price',
-                'Program',
-                'FixedCost',
-            ],
-        }, {
-            name: 'detail',
-            querySelect: [
-                'Description',
-                'Name',
-                'Family',
-                'Price',
-                'Program',
-                'FixedCost',
-            ],
-            queryInclude: [
-                '$permissions',
-            ],
-        }];
-    },
-    //getEntry: function getEntry(/* options */) {
-    //    const results$ = this.inherited(arguments);
-    //    return results$.then((entry) => {
-    //        return new Promise((resolve) => {
-    //            App.picklistService.requestPicklist(`Account ${entry.Type}`).then(() => {
-    //                resolve(entry);
-    //            });
-    //        });
-    //    });
-    //},
+  id: 'product_sdata_model',
+  createQueryModels: function createQueryModels() {
+    return [{
+      name: 'list',
+      queryOrderBy: '',
+      querySelect: [
+        'Description',
+        'Name',
+        'Family',
+        'Price',
+        'Program',
+        'FixedCost',
+      ],
+    }, {
+      name: 'detail',
+      querySelect: [
+        'Description',
+        'Name',
+        'Family',
+        'Price',
+        'Program',
+        'FixedCost',
+      ],
+      queryInclude: [
+        '$permissions',
+      ],
+    }];
+  },
+  // getEntry: function getEntry(/* options */) {
+  //    const results$ = this.inherited(arguments);
+  //    return results$.then((entry) => {
+  //        return new Promise((resolve) => {
+  //            App.picklistService.requestPicklist(`Account ${entry.Type}`).then(() => {
+  //                resolve(entry);
+  //            });
+  //        });
+  //    });
+  // },
 });
 
 Manager.register(MODEL_NAMES.PRODUCT, MODEL_TYPES.SDATA, __class);

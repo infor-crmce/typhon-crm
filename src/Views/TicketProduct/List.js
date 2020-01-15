@@ -17,7 +17,7 @@ import declare from 'dojo/_base/declare';
 import List from 'argos/List';
 import getResource from 'argos/I18n';
 
-//const resource = getResource('TicketProductList');
+// const resource = getResource('TicketProductList');
 
 /**
  * @class crm.Views.OpportunityProduct.List
@@ -28,23 +28,23 @@ import getResource from 'argos/I18n';
  */
 const __class = declare('crm.Views.TicketProduct.List', [List], {
   // Templates
-    itemTemplate: new Simplate([
-      '<p> {%: $.ProductName %}</p>'
-    //'<p class="micro-text">',
-    //'{% if ($.Product) { %} {%: $.Product.Family %} | {% } %}',
-    //'{%: $.Program %} | {%: crm.Format.currency($.Price) %}',
-    //'</p>',
-    //'<p class="micro-text">',
-    //'{%: $.Quantity %} x {%: crm.Format.currency($.CalculatedPrice) %} ',
-    //'({%: crm.Format.percent($.Discount) %}) = ',
-    //'<strong>',
-    //'{% if (App.hasMultiCurrency()) { %}',
-    //'{%: crm.Format.multiCurrency($.ExtendedPrice, App.getBaseExchangeRate().code) %}',
-    //'{% } else { %}',
-    //'{%: crm.Format.currency($.ExtendedPrice) %}',
-    //'{% } %}',
-    //'</strong>',
-    //'</p>',
+  itemTemplate: new Simplate([
+    '<p> {%: $.ProductName %}</p>',
+    // '<p class="micro-text">',
+    // '{% if ($.Product) { %} {%: $.Product.Family %} | {% } %}',
+    // '{%: $.Program %} | {%: crm.Format.currency($.Price) %}',
+    // '</p>',
+    // '<p class="micro-text">',
+    // '{%: $.Quantity %} x {%: crm.Format.currency($.CalculatedPrice) %} ',
+    // '({%: crm.Format.percent($.Discount) %}) = ',
+    // '<strong>',
+    // '{% if (App.hasMultiCurrency()) { %}',
+    // '{%: crm.Format.multiCurrency($.ExtendedPrice, App.getBaseExchangeRate().code) %}',
+    // '{% } else { %}',
+    // '{%: crm.Format.currency($.ExtendedPrice) %}',
+    // '{% } %}',
+    // '</strong>',
+    // '</p>',
   ]),
 
   // Localization
@@ -53,27 +53,27 @@ const __class = declare('crm.Views.TicketProduct.List', [List], {
   // View Properties
   id: 'ticketproduct_list',
   security: 'Entities/Opportunity/View',
-    detailView: 'ticketproduct_detail',
-    insertView: 'ticketProducts_edit',
-  //queryOrderBy: 'Sort',
+  detailView: 'ticketproduct_detail',
+  insertView: 'ticketProducts_edit',
+  // queryOrderBy: 'Sort',
   querySelect: [
     'ProductName',
-    //'Product/Family',
-    //'Program',
-    //'Price',
-    //'Discount',
-    //'CalculatedPrice',
-    //'Quantity',
-    //'ExtendedPrice',
+    // 'Product/Family',
+    // 'Program',
+    // 'Price',
+    // 'Discount',
+    // 'CalculatedPrice',
+    // 'Quantity',
+    // 'ExtendedPrice',
   ],
-    resourceKind: 'ticketAccountProducts',//'accountproducts',
+  resourceKind: 'ticketAccountProducts', // 'accountproducts',
   allowSelection: true,
   enableActions: true,
 
-  //formatSearchQuery: function formatSearchQuery(searchQuery) {
+  // formatSearchQuery: function formatSearchQuery(searchQuery) {
   //  const q = this.escapeSearchQuery(searchQuery.toUpperCase());
   //  return `(upper(Product.Name) like "${q}%" or upper(Product.Family) like "${q}%")`;
-  //},
+  // },
 });
 
 export default __class;

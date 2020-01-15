@@ -283,8 +283,7 @@ const __class = declare('crm.AttachmentManager', null, /** @lends crm.Attachment
   },
   onSuccessUpload: function onSuccessUpload(request) {
     // the id of the new attachment is buried in the Location response header...
-      if (request == null)
-          return;
+    if (request == null) { return; }
     const url = request.getResponseHeader('Location');
     const re = /'\w+'/g;
     const matches = url.match(re);
