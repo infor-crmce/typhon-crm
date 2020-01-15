@@ -16,6 +16,7 @@
 import declare from 'dojo/_base/declare';
 import lang from 'dojo/_base/lang';
 import _ModelBase from 'argos/Models/_ModelBase';
+import format from 'crm/Format';
 import MODEL_NAMES from '../Names';
 import getResource from 'argos/I18n';
 
@@ -55,10 +56,9 @@ const __class = declare('crm.Integrations.BOE.Models.PaymentDistribution.Base', 
   },
   getEntityDescription: function getEntityDescription(entry) {
     if (entry) {
-      const type = entry.Type || '';
-      const amount = entry.AppliedAmount || '';
-      const payment = entry.PaymentId || '';
-      const titleText = `${payment} - ${amount} -  ${type}`;
+      const date = format.relativeDate(entry.AppliedDate, true);
+      const amount = format.currency(entry.AppliedAmount);
+      const titleText = `${date} /  ${amount}`;
       return titleText;
     }
     return '';
