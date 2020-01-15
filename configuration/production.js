@@ -6,5 +6,6 @@ define('configuration/production', [
   return lang.mixin(defaultConfig, {
     // Override default properties here, example:
      enableOfflineSupport: true,
+     enableConcurrencyCheck: true,
   });
 });
