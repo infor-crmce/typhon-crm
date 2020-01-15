@@ -66,8 +66,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.List', [
   entityName: 'PaymentDistribution',
 
   // Card layout
-  itemIconClass: 'warehouse',
-
+  itemIconClass: 'expense-report',
   createActionLayout: function createActionLayout() {
     return this.actions || (this.actions = [{
       id: 'viewERPInvoice',

@@ -71,7 +71,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
   entityName: 'Payment',
 
   // Card layout
-  itemIconClass: 'warehouse',
+  itemIconClass: 'finance',
   createActionLayout: function createActionLayout() {
     return this.actions || (this.actions = [{
       id: 'viewAccount',
