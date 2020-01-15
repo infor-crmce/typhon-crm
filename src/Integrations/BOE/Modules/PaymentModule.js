@@ -75,6 +75,18 @@ const __class = declare('crm.Integrations.BOE.Modules.Payment', [_Module], {
         }
       },
     }));
+    am.registerView(new PaymentList({
+      expose: true,
+      id: 'account_payment_related',
+      onAddDistributionClick: function onAddDistributionClick() {
+        const key = arguments[1].data.$key;
+        const data = this.entries;
+        if (!!key && !!data) {
+          const dataContext = { data: data[key] };
+          thisModule._onAddDistributionClick(arguments[0], dataContext);
+        }
+      },
+    }));
 
     am.registerView(new AccountList({
       id: 'account_payments',

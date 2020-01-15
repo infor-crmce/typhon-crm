@@ -814,13 +814,13 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
       }, {
         name: 'AddDistribution',
         label: 'Add Distribution',
-        iconClass: 'cart',
+        iconClass: 'expense-report', // 'document2',
         action: '_onAddDistributionClick',
         security: 'Entities/PaymentDistribution/Add',
       }, {
         name: 'AddPayment',
         label: 'Add Payment',
-        iconClass: 'cart',
+        iconClass: 'finance',
         action: '_onAddPaymentClick',
         security: 'Entities/Payment/Add',
       }],
@@ -930,7 +930,7 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
           where: function where(entry) {
             return `Account.Id eq "${entry.$key}"`;
           },
-          view: 'payment_list',
+          view: 'account_payment_related',
         }, {
           name: 'ERPReceivablesRelated',
           label: this.erpReceivablesText,
