@@ -1136,7 +1136,7 @@
   moreDetailsText: "More Details"
   descriptionText: "Description"
   entityText: "Payment Item"
-  addPaymentActionText: "Add Payment"
+  addDistributionActionText: "Add Distribution"
 >
 
 <paymentList ""
@@ -1156,7 +1156,7 @@
   editActionText: "Edit"
   viewAccountActionText: "View Account"
   viewDistributionsActionText: "View Distributions"
-  addPaymentActionText: "Add Payment"
+  addDistributionActionText: "Add Distribution"
 >
 <paymentDistributionEdit ""
   titleText: "Payment Distribution"

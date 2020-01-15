@@ -42,23 +42,23 @@ const __class = declare('crm.Integrations.BOE.Modules.Payment', [_Module], {
     }));
     am.registerView(new PaymentDetail({
       expose: false,
-      onAddPaymentClick: function onAddPaymentClick() {
+      onAddDistributionClick: function onAddDistributionClick() {
         const key = this.options.key;
         const data = this.options.fromContext.entries;
         if (!!key && !!data) {
           const dataContext = { data: data[key] };
-          thisModule._onAddPaymentClick(arguments[0], dataContext);
+          thisModule._onAddDistributionClick(arguments[0], dataContext);
         }
       },
     }));
     am.registerView(new PaymentList({
       expose: true,
-      onAddPaymentClick: function onAddPaymentClick() {
+      onAddDistributionClick: function onAddDistributionClick() {
         const key = arguments[1].data.$key;
         const data = this.entries;
         if (!!key && !!data) {
           const dataContext = { data: data[key] };
-          thisModule._onAddPaymentClick(arguments[0], dataContext);
+          thisModule._onAddDistributionClick(arguments[0], dataContext);
         }
       },
     }));
@@ -77,7 +77,7 @@ const __class = declare('crm.Integrations.BOE.Modules.Payment', [_Module], {
       expose: false,
     }));
   },
-  _onAddPaymentClick: function _onAddPaymentClick(actionContext, dataContext) {
+  _onAddDistributionClick: function _onAddDistributionClick(actionContext, dataContext) {
     const view = App.getView('payment_distribution_insert');
     const data = {
       Payment: {

@@ -612,7 +612,7 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
           insert: true,
         });
       },
-      _onMakePaymentClick: function _onMakePaymentClick() {
+      _onAddDistributionClick: function _onAddDistributionClick() {
         const view = App.getView('payment_distribution_insert');
         const data = { Account: {
           $key: this.options.key,
@@ -626,7 +626,7 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
           insert: true,
         });
       },
-      _onTakePaymentClick: function _onTakePaymentClick() {
+      _onAddPaymentClick: function _onAddPaymentClick() {
         const view = App.getView('payment_insert');
         const data = { Account: {
           $key: this.options.key,
@@ -816,16 +816,16 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
         action: '_onAddOrderClick',
         security: 'Entities/SalesOrder/Add',
       }, {
-        name: 'MakePayment',
-        label: 'Make Payment',
+        name: 'AddDistribution',
+        label: 'Add Distribution',
         iconClass: 'cart',
-        action: '_onMakePaymentClick',
+        action: '_onAddDistributionClick',
         security: 'Entities/PaymentDistribution/Add',
       }, {
-        name: 'TakePayment',
-        label: 'Take Payment',
+        name: 'AddPayment',
+        label: 'Add Payment',
         iconClass: 'cart',
-        action: '_onTakePaymentClick',
+        action: '_onAddPaymentClick',
         security: 'Entities/Payment/Add',
       }],
     });

@@ -47,7 +47,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
   paymentDateLabelText: resource.paymentDateLabelText,
   viewAccountActionText: resource.viewAccountActionText,
   viewDistributionsActionText: resource.viewDistributionsActionText,
-  addPaymentActionText: resource.addPaymentActionText,
+  addDistributionActionText: resource.addDistributionActionText,
   editActionText: resource.editActionText,
 
   // View Properties
@@ -71,9 +71,6 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
 
   // Card layout
   itemIconClass: 'warehouse',
-  _onAddPaymentClick: function _onAddPaymentClick() {
-    this.onAddPaymentClick();
-  },
   createActionLayout: function createActionLayout() {
     return this.actions || (this.actions = [{
       id: 'viewAccount',
@@ -94,10 +91,10 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
         textProperty: 'PaymentId',
       }),
     }, {
-      id: 'addPayment',
-      label: this.addPaymentActionText,
+      id: 'addDistribution',
+      label: this.addDistributionActionText,
       enabled: true,
-      action: 'onAddPaymentClick',
+      action: 'onAddDistributionClick',
     }, {
       id: 'edit',
       cls: 'edit',
