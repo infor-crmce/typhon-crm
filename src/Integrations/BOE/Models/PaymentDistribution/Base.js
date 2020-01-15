@@ -56,7 +56,7 @@ const __class = declare('crm.Integrations.BOE.Models.PaymentDistribution.Base', 
   },
   getEntityDescription: function getEntityDescription(entry) {
     if (entry) {
-      const date = format.relativeDate(entry.AppliedDate, true);
+      const date = format.date(entry.AppliedDate, null, false);
       const amount = format.currency(entry.AppliedAmount);
       const titleText = `${date} /  ${amount}`;
       return titleText;

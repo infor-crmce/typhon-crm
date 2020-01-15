@@ -33,10 +33,9 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.List', [
 
   // Templates
   itemTemplate: new Simplate([
-    '<p class="listview-heading"><label class="group-label">{%: $$.PaymentId %}</label> {%: $.PaymentId %}</p>',
-    // '<p class="micro-text"> {% if ($.ERPInvoice && $.ERPInvoice.InvoiceNumber) { %}<label class="group-label">{%: $$.invoiceLabelText %}</label> $.ERPInvoice.InvoiceNumber {% } %}</p>',
+    '<p class="listview-heading"><label class="group-label">{%: $$.paymentLabelText %}</label> {%: $.PaymentId %}</p>',
     '<p class="micro-text"> {% if ($.AppliedDate) { %}<label class="group-label">{%: $$.distributionDateLabelText %}</label> {%: $$.formatter.date($.AppliedDate) %} {% } %}</p>',
-    '<p class="micro-text"><label class="group-label">{%: $$.paymentLabelText %}</label> {%: $.AppliedAmount %}</p>',
+    '<p class="micro-text"><label class="group-label">{%: $$.amountLabelText %}</label> {%: $.AppliedAmount %}</p>',
   ]),
 
   // Localization
@@ -45,6 +44,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.List', [
   amountLabelText: resource.amountLabelText,
   distributionDateLabelText: resource.distributionDateLabelText,
   paymentLabelText: resource.paymentLabelText,
+  amountLabelText: resource.amountLabelText,
   invoiceLabelText: resource.invoiceLabelText,
 
   // View Properties
