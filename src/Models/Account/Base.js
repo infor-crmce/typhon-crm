@@ -25,6 +25,7 @@ const historyResource = getResource('historyModel');
 const oppResource = getResource('opportunityModel');
 const addressResource = getResource('addressModel');
 const ticketResource = getResource('ticketModel');
+const paymentResource = getResource('paymentModel');
 
 const __class = declare('crm.Models.Account.Base', [_ModelBase], {
   resourceKind: 'accounts',
@@ -87,6 +88,13 @@ const __class = declare('crm.Models.Account.Base', [_ModelBase], {
       displayName: ticketResource.entityDisplayNamePlural,
       type: 'OneToMany',
       relatedEntity: 'Ticket',
+      relatedProperty: 'Account',
+      relatedPropertyType: 'object',
+    }, {
+      name: 'Payments',
+      displayName: paymentResource.entityDisplayNamePlural,
+      type: 'OneToMany',
+      relatedEntity: 'Payment',
       relatedProperty: 'Account',
       relatedPropertyType: 'object',
     }]);

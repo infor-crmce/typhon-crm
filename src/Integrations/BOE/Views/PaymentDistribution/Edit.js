@@ -34,6 +34,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
   updateSecurity: 'Entities/PaymentDistribution/Edit',
   resourceKind: 'paymentDistributions',
 
+  enableOffline: true,
   // localization
   titleText: resource.titleText,
   typeLabelText: resource.typeLabelText,

@@ -22,10 +22,11 @@ import getResource from 'argos/I18n';
 
 const resource = getResource('paymentModel');
 const accountResource = getResource('accountModel');
+const distributionResource = getResource('paymentDistributionModel');
 
 const __class = declare('crm.Integrations.BOE.Models.Payment.Base', [_ModelBase], {
   contractName: 'dynamic',
-  resourceKind: 'payment',
+  resourceKind: 'payments',
   entityName: 'Payment',
   entityDisplayName: resource.entityDisplayName,
   entityDisplayNamePlural: resource.entityDisplayNamePlural,
@@ -43,6 +44,13 @@ const __class = declare('crm.Integrations.BOE.Models.Payment.Base', [_ModelBase]
       parentProperty: 'Account',
       parentPropertyType: 'object',
       relatedEntity: 'Account',
+    }, {
+      name: 'PaymentDistribution',
+      displayName: distributionResource.entityDisplayName,
+      type: 'OneToMany',
+      parentProperty: 'Payment',
+      parentPropertyType: 'object',
+      relatedEntity: 'PaymentDistribution',
     }]);
     return rel;
   },

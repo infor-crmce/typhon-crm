@@ -1472,6 +1472,16 @@
   entityDisplayNamePlural : "Accounts"
 >
 
+<paymentModel ""
+  entityDisplayName: "Payment"
+  entityDisplayNamePlural : "Payments"
+>
+
+<paymentDistributionModel ""
+  entityDisplayName: "Payment Distribution"
+  entityDisplayNamePlural : "Payment Distributions"
+>
+
 <contactModel ""
   entityDisplayName: "Contact"
   entityDisplayNamePlural : "Contacts"

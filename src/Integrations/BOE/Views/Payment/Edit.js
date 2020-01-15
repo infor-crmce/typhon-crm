@@ -34,6 +34,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
   updateSecurity: 'Entities/Payment/Edit',
   resourceKind: 'payments',
 
+  enableOffline: true,
   // localization
   titleText: resource.titleText,
   accountLabelText: resource.accountLabelText,

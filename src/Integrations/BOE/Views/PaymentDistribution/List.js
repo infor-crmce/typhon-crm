@@ -19,14 +19,14 @@ import action from 'crm/Action';
 import List from 'argos/List';
 import format from 'crm/Format';
 import _RightDrawerListMixin from 'crm/Views/_RightDrawerListMixin';
-import _MetricListMixin from 'crm/Views/_MetricListMixin';
+import _ListOfflineMixin from 'argos/Offline/_ListOfflineMixin';
 import MODEL_NAMES from '../../Models/Names';
 import utility from '../../Utility';
 import getResource from 'argos/I18n';
 
 const resource = getResource('paymentDistributionList');
 
-const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.List', [List, _RightDrawerListMixin, _MetricListMixin], {
+const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.List', [List, _RightDrawerListMixin, _ListOfflineMixin], {
   formatter: format,
   util: utility,
 
@@ -55,6 +55,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.List', [
   allowSelection: true,
   enableActions: true,
   enableHashTags: true,
+  enableOffline: true,
   expose: true,
   security: 'Entities/PaymentDistribution/View',
   insertSecurity: 'Entities/PaymentDistribution/Add',

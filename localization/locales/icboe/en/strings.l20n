@@ -46,6 +46,16 @@
   entityDisplayNamePlural: "Bill To Accounts"
 >
 
+<paymentModel ""
+  entityDisplayName: "Payment"
+  entityDisplayNamePlural : "Payments"
+>
+
+<paymentDistributionModel ""
+  entityDisplayName: "Payment Distribution"
+  entityDisplayNamePlural : "Payment Distributions"
+>
+
 <erpContactAssociationModel ""
   entityDisplayName: "Contact Association"
   entityDisplayNamePlural: "Contact Associations"

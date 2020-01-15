@@ -18,15 +18,15 @@ import lang from 'dojo/_base/lang';
 import action from 'crm/Action';
 import List from 'argos/List';
 import format from 'crm/Format';
+import _ListOfflineMixin from 'argos/Offline/_ListOfflineMixin';
 import _RightDrawerListMixin from 'crm/Views/_RightDrawerListMixin';
-import _MetricListMixin from 'crm/Views/_MetricListMixin';
 import MODEL_NAMES from '../../Models/Names';
 import utility from '../../Utility';
 import getResource from 'argos/I18n';
 
 const resource = getResource('paymentList');
 
-const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _RightDrawerListMixin, _MetricListMixin], {
+const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _RightDrawerListMixin, _ListOfflineMixin], {
   formatter: format,
   util: utility,
 
@@ -60,6 +60,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
   allowSelection: true,
   enableActions: true,
   enableHashTags: true,
+  enableOffline: true,
   expose: true,
   security: 'Entities/Payment/View',
   insertSecurity: 'Entities/Payment/Add',

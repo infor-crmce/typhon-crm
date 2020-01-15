@@ -26,7 +26,7 @@ const invoiceResource = getResource('erpInvoiceModel');
 
 const __class = declare('crm.Integrations.BOE.Models.PaymentDistribution.Base', [_ModelBase], {
   contractName: 'dynamic',
-  resourceKind: 'paymentDistribution',
+  resourceKind: 'paymentDistributions',
   entityName: 'PaymentDistribution',
   entityDisplayName: resource.entityDisplayName,
   entityDisplayNamePlural: resource.entityDisplayNamePlural,
