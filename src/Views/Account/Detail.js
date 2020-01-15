@@ -247,7 +247,7 @@ const __class = declare('crm.Views.Account.Detail', [Detail], {
         name: 'AccountSurveyRelated',
         label: this.relatedSurveyText,
         where: this.formatRelatedQuery.bindDelegate(this, 'SurveyAccounts.AccountId eq "${0}"'), // must be lower case because of feed
-        view: 'surveyTake_list',
+        view: 'surveyTake_related',
         title: this.relatedSurveyTitleText,
       }],
     }]);
