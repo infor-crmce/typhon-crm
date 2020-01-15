@@ -139,6 +139,9 @@ import RecentlyViewedList from './Views/RecentlyViewed/List';
 import BriefcaseList from './Views/Briefcase/List';
 import OfflineOptionsEdit from './Views/OfflineOptions/Edit';
 import LanguageOptionsEdit from './Views/LanguageOptions/Edit';
+import TicketProductsEdit from './Views/TicketProduct/Edit';
+import TicketProductList from './Views/TicketProduct/List';
+
 import getResource from 'argos/I18n';
 import MODEL_NAMES from './Models/Names';
 import MODEL_TYPES from 'argos/Models/Types';
@@ -441,7 +444,8 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
       defaultSearchTerm: () => {
         return '';
       },
-    }));
+    })); 
+      this.registerView(new TicketProductsEdit());
 
     this.registerView(new OpportunityProductList({
       id: 'opportunityproduct_related',
@@ -504,6 +508,7 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
         return '';
       },
     }));
+      this.registerView(new TicketProductList());
 
     this.registerView(new TicketActivityItemList());
     this.registerView(new TicketActivityItemDetail());
