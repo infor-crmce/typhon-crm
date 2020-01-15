@@ -444,8 +444,8 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
       defaultSearchTerm: () => {
         return '';
       },
-    })); 
-      this.registerView(new TicketProductsEdit());
+    }));
+    this.registerView(new TicketProductsEdit());
 
     this.registerView(new OpportunityProductList({
       id: 'opportunityproduct_related',
@@ -508,7 +508,7 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
         return '';
       },
     }));
-      this.registerView(new TicketProductList());
+    this.registerView(new TicketProductList());
 
     this.registerView(new TicketActivityItemList());
     this.registerView(new TicketActivityItemDetail());
