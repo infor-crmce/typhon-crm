@@ -13,18 +13,16 @@
  * limitations under the License.
  */
 
-export default {
-  ACCOUNT: 'Account',
-  ACTIVITY: 'Activity',
-  CONTACT: 'Contact',
-  LEAD: 'Lead',
-  LEADADDRESS: 'LeadAddress',
-  OPPORTUNITY: 'Opportunity',
-  TICKET: 'Ticket',
-  USERACTIVITY: 'UserActivity',
-  ADDRESS: 'Address',
-  HISTORY: 'History',
-  PLACE: 'Place',
-  PAYMENT: 'Payment',
-  PAYMENTDISTRIBUTION: 'PaymentDistribution',
-};
+import declare from 'dojo/_base/declare';
+import Base from './Base';
+import _OfflineModelBase from 'argos/Models/_OfflineModelBase';
+import Manager from 'argos/Models/Manager';
+import MODEL_TYPES from 'argos/Models/Types';
+import MODEL_NAMES from '../Names';
+
+const __class = declare('crm.Integrations.BOE.Models.Payment.Offline', [Base, _OfflineModelBase], {
+  id: 'payment_offline_model',
+});
+
+Manager.register(MODEL_NAMES.PAYMENT, MODEL_TYPES.OFFLINE, __class);
+export default __class;

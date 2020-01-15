@@ -47,6 +47,7 @@ const __class = lang.setObject('crm.Environment', {
   },
   attachmentViewsToRefresh: [
     'myattachment_list',
+    'attachment_offlinelist',
     'attachment_list',
     'attachment_related',
     'account_attachment_related',

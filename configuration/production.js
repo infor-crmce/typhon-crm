@@ -5,6 +5,6 @@ define('configuration/production', [
 ], function cb(lang, defaultConfig) {
   return lang.mixin(defaultConfig, {
     // Override default properties here, example:
-    // enableOfflineSupport: true,
+     enableOfflineSupport: true,
   });
 });
