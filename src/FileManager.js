@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable func-names */
+
 /* Copyright 2017 Infor
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +34,7 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
   largeFileWarningTitle: resource.largeFileWarningTitle,
   percentCompleteText: resource.percentCompleteText,
   fileUploadOptions: {
-    maxFileSize: 100000000,
+    maxFileSize: 121000000,
   },
   _store: false,
   _totalProgress: 0,
@@ -46,7 +48,7 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
      */
   constructor: function constructor() {
     this._files = [];
-    this.fileUploadOptions.maxFileSize = App.maxUploadFileSize;
+    this.fileUploadOptions.maxFileSize = 121000000;// App.maxUploadFileSize;
   },
   /**
      * Checks the {@link crm.Application}'s maxFileSize to determine
@@ -91,10 +93,10 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
     // complete.call(scope || this, 'hi');
     // this.uploadFileHTML5(file, url, progress, complete, error, scope, asPut);
   },
-  uploadOfflineFile: function uploadFile(fileName, url, progress, complete, error, scope, asPut) {
+  uploadOfflineFile: function uploadFile(fileName, url, _progress, _complete, _error, _scope, asPut) {
     // this.uploadFileHTML5(file, url, progress, complete, error, scope, asPut);
     const indexdbRequest = indexedDB.open('dataFiles', '1.0');
-    indexdbRequest.onsuccess = function () {
+    indexdbRequest.onsuccess = function (_e) {
       const indexdb = indexdbRequest.result;
       const readWriteMode = typeof IDBTransaction.READ_WRITE === 'undefined' ? 'readwrite' : IDBTransaction.READ_WRITE;
       const transaction = indexdb.transaction(['files'], readWriteMode);
@@ -102,17 +104,16 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
 
       // Get a single item
       const req = objectStore.get(fileName);// "1KB.bin"
-      req.onerror = function (e) {
+      req.onerror = function (event) {
         console.log('error storing data');
-        console.log(e);
+        console.log(event);
       };
       req.onsuccess = function (e) {
         console.log('Got the offline file ');
         const request = new XMLHttpRequest();
         const service = App.getService();
-
-        // url = url+'/attachments/file';//TODO
-        url = 'http://localhost:8000/sdata/slx/system/-/attachments/file';
+        url = `${url}/attachments/file`;// TODO
+        // url = 'http://localhost:8000/sdata/slx/system/-/attachments/file';
 
         request.open((asPut) ? 'PUT' : 'POST', url);
         request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -144,7 +145,7 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
       return;
     }
     if (App.supportsFileAPI()) {
-      this._uploadFileHTML5_asBinary(file, url, progress, complete, error, scope, asPut);
+      if (App.isOnline()) { this._uploadFileHTML5_asBinary(file, url, progress, complete, error, scope, asPut); } else { this._uploadFileHTML5_asBinary_offline(file, url, progress, complete, error, scope, asPut); }
     } else {
       this._onUnableToUploadError(this.unableToUploadText, error);
     }
@@ -176,23 +177,19 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
         console.log('error storing data');
         console.error(e);
       };
-      transaction.oncomplete = function () {
+      transaction.oncomplete = function (_e) {
         complete.call(scope || context, null);
         console.log('data stored');
       };// Done
     };
 
-    request.onerror = function () {
+    request.onerror = function (_event) {
       console.log('Error creating/accessing IndexedDB database');
     };
 
-    request.onsuccess = function () {
+    request.onsuccess = function (_event) {
       console.log('Success creating/accessing IndexedDB database');
       db = request.result;
-
-      db.onerror = function () {
-        console.log('Error creating/accessing IndexedDB database');
-      };
 
       // Interim solution for Google Chrome to create an objectStore. Will be deprecated
       if (db.setVersion) {
@@ -218,110 +215,111 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
   },
 
   // original code
-  // _uploadFileHTML5_asBinary: function _uploadFileHTML5_asBinary(file, _url, progress, complete, error, scope, asPut) {// eslint-disable-line
-  //    let url = _url;
-  //    const request = new XMLHttpRequest();
-  //    const service = App.getService();
-  //    window.BlobBuilder = window.BlobBuilder ||
-  //        window.WebKitBlobBuilder ||
-  //        window.MozBlobBuilder ||
-  //        window.MSBlobBuilder;
-  //    if (!url) {
-  //        // assume Attachment SData url
-  //        url = 'slxdata.ashx/slx/system/-/attachments/file'; // TODO: Remove this assumption from SDK
-  //    }
-
-  //    request.open((asPut) ? 'PUT' : 'POST', url);
-  //    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-
-  //    if (service) {
-  //        request.setRequestHeader('Authorization', service.createBasicAuthToken());
-  //        request.setRequestHeader('X-Authorization', service.createBasicAuthToken());
-  //        request.setRequestHeader('X-Authorization-Mode', 'no-challenge');
-
-  //        if (App.isMingleEnabled()) {
-  //            const accessToken = App.mingleAuthResults.access_token;
-  //            request.setRequestHeader('Authorization', `Bearer ${accessToken}`);
-  //            request.setRequestHeader('X-Authorization', `Bearer ${accessToken}`);
-  //        }
-  //    }
-
-  //    const reader = new FileReader();
-  //    reader.onload = lang.hitch(this, function readerOnLoad(evt) {
-  //        const unknownErrorText = this.unknownErrorText;
-  //        const blobReader = new FileReader(); // read the blob as an ArrayBuffer to work around this android issue: https://code.google.com/p/android/issues/detail?id=39882
-  //        let bb;
-  //        let usingBlobBuilder;
-  //        let blobData;
-
-  //        try {
-  //            bb = new Blob(); // This will throw an exception if it is not supported (android)
-  //            bb = [];
-  //        } catch (e) {
-  //            bb = new window.BlobBuilder();
-  //            usingBlobBuilder = true;
-  //        }
-
-  //        const binary = evt.target.result;
-  //        const boundary = `---------------------------${(new Date()).getTime()}`;
-  //        const dashdash = '--';
-  //        const crlf = '\r\n';
-
-  //        this._append(bb, dashdash + boundary + crlf);
-  //        this._append(bb, 'Content-Disposition: attachment; ');
-  //        this._append(bb, 'name="file_"; ');
-  //        this._append(bb, `filename*="${encodeURI(file.name)}" `);
-  //        this._append(bb, crlf);
-  //        this._append(bb, `Content-Type: ${file.type}`);
-  //        this._append(bb, crlf + crlf);
-  //        this._append(bb, binary);
-  //        this._append(bb, crlf);
-  //        this._append(bb, dashdash + boundary + dashdash + crlf);
-
-  //        if (complete) {
-  //            request.onreadystatechange = function onReadyStateChange() {
-  //                if (request.readyState === 4) {
-  //                    if (Math.floor(request.status / 100) !== 2) {
-  //                        if (error) {
-  //                            error.call(scope || this, unknownErrorText);
-  //                            console.warn(unknownErrorText + ' ' + request.responseText);// eslint-disable-line
-  //                        }
-  //                    } else {
-  //                        complete.call(scope || this, request);
-  //                    }
-  //                }
-  //            };
-  //        }
-
-  //        if (progress) {
-  //            request.upload.addEventListener('progress', function uploadProgress(e) {
-  //                progress.call(scope || this, e);
-  //            });
-  //        }
-
-  //        request.setRequestHeader('Content-Type', `multipart/attachment; boundary=${boundary}`);
-
-  //        if (usingBlobBuilder) {
-  //            blobData = bb.getBlob(file.type);
-  //        } else {
-  //            blobData = new Blob(bb);
-  //        }
-
-  //        // Read the blob back as an ArrayBuffer to work around this android issue:
-  //        // https://code.google.com/p/android/issues/detail?id=39882
-  //        blobReader.onload = function blobReaderOnLoad(e) {
-  //            request.send(e.target.result);
-  //        };
-
-  //        blobReader.readAsArrayBuffer(blobData);
-  //    });
-
-  //    reader.readAsArrayBuffer(file);
-  // },
-
-
     _uploadFileHTML5_asBinary: function _uploadFileHTML5_asBinary(file, _url, progress, complete, error, scope, asPut) {// eslint-disable-line
+    let url = _url;
+    const request = new XMLHttpRequest();
+    const service = App.getService();
+    window.BlobBuilder = window.BlobBuilder ||
+            window.WebKitBlobBuilder ||
+            window.MozBlobBuilder ||
+            window.MSBlobBuilder;
+    if (!url) {
+      // assume Attachment SData url
+      url = 'slxdata.ashx/slx/system/-/attachments/file'; // TODO: Remove this assumption from SDK
+    }
+
+    request.open((asPut) ? 'PUT' : 'POST', url);
+    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    if (service) {
+      request.setRequestHeader('Authorization', service.createBasicAuthToken());
+      request.setRequestHeader('X-Authorization', service.createBasicAuthToken());
+      request.setRequestHeader('X-Authorization-Mode', 'no-challenge');
+
+      if (App.isMingleEnabled()) {
+        const accessToken = App.mingleAuthResults.access_token;
+        request.setRequestHeader('Authorization', `Bearer ${accessToken}`);
+        request.setRequestHeader('X-Authorization', `Bearer ${accessToken}`);
+      }
+    }
+
+    const reader = new FileReader();
+    reader.onload = lang.hitch(this, function readerOnLoad(evt) {
+      const unknownErrorText = this.unknownErrorText;
+      const blobReader = new FileReader(); // read the blob as an ArrayBuffer to work around this android issue: https://code.google.com/p/android/issues/detail?id=39882
+      let bb;
+      let usingBlobBuilder;
+      let blobData;
+
+      try {
+        bb = new Blob(); // This will throw an exception if it is not supported (android)
+        bb = [];
+      } catch (e) {
+        bb = new window.BlobBuilder();
+        usingBlobBuilder = true;
+      }
+
+      const binary = evt.target.result;
+      const boundary = `---------------------------${(new Date()).getTime()}`;
+      const dashdash = '--';
+      const crlf = '\r\n';
+
+      this._append(bb, dashdash + boundary + crlf);
+      this._append(bb, 'Content-Disposition: attachment; ');
+      this._append(bb, 'name="file_"; ');
+      this._append(bb, `filename*="${encodeURI(file.name)}" `);
+      this._append(bb, crlf);
+      this._append(bb, `Content-Type: ${file.type}`);
+      this._append(bb, crlf + crlf);
+      this._append(bb, binary);
+      this._append(bb, crlf);
+      this._append(bb, dashdash + boundary + dashdash + crlf);
+
+      if (complete) {
+        request.onreadystatechange = function onReadyStateChange() {
+          if (request.readyState === 4) {
+            if (Math.floor(request.status / 100) !== 2) {
+              if (error) {
+                error.call(scope || this, unknownErrorText);
+                                console.warn(unknownErrorText + ' ' + request.responseText);// eslint-disable-line
+              }
+            } else {
+              complete.call(scope || this, request);
+            }
+          }
+        };
+      }
+
+      if (progress) {
+        request.upload.addEventListener('progress', function uploadProgress(e) {
+          progress.call(scope || this, e);
+        });
+      }
+
+      request.setRequestHeader('Content-Type', `multipart/attachment; boundary=${boundary}`);
+
+      if (usingBlobBuilder) {
+        blobData = bb.getBlob(file.type);
+      } else {
+        blobData = new Blob(bb);
+      }
+
+      // Read the blob back as an ArrayBuffer to work around this android issue:
+      // https://code.google.com/p/android/issues/detail?id=39882
+      blobReader.onload = function blobReaderOnLoad(e) {
+        request.send(e.target.result);
+      };
+
+      blobReader.readAsArrayBuffer(blobData);
+    });
+
+    reader.readAsArrayBuffer(file);
+  },
+
+  // Add file to IndexDB
+    _uploadFileHTML5_asBinary_offline: function _uploadFileHTML5_asBinary_offline(file, _url, _progress, complete, _error, scope, _asPut) {// eslint-disable-line
     const context = this;
+    const service = App.getService();
     window.BlobBuilder = window.BlobBuilder ||
             window.WebKitBlobBuilder ||
             window.MozBlobBuilder ||
@@ -329,6 +327,7 @@ const __class = declare('crm.FileManager', null, /** @lends crm.FileManager# */{
 
     const reader = new FileReader();
     reader.onload = lang.hitch(this, function readerOnLoad(evt) {
+      const unknownErrorText = this.unknownErrorText;
       const blobReader = new FileReader(); // read the blob as an ArrayBuffer to work around this android issue: https://code.google.com/p/android/issues/detail?id=39882
       let bb;
       let usingBlobBuilder;

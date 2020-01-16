@@ -141,5 +141,5 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
   },
 });
 
-lang.setObject('icboe.Views.ERPShipTos.Edit', __class);
+lang.setObject('icboe.Views.Payment.Edit', __class);
 export default __class;

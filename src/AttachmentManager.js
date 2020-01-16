@@ -18,6 +18,7 @@ import lang from 'dojo/_base/lang';
 import declare from 'dojo/_base/declare';
 import convert from 'argos/Convert';
 import utility from './Utility';
+import Environment from './Environment';
 
 /**
  * @class crm.AttachmentManager
@@ -284,6 +285,10 @@ const __class = declare('crm.AttachmentManager', null, /** @lends crm.Attachment
   onSuccessUpload: function onSuccessUpload(request) {
     // the id of the new attachment is buried in the Location response header...
     if (request == null) {
+      this._resetCounts();
+      this.onUpdateProgress(100.00);
+      Environment.refreshAttachmentViews();
+      ReUI.back();
       return;
     }
 
