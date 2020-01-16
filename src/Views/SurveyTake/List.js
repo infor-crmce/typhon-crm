@@ -73,7 +73,7 @@ const __class = declare('crm.Views.SurveyTake.List', [List, _RightDrawerListMixi
     return this.actions || (this.actions = [{
       id: 'take',
       cls: 'edit',
-      label: 'Take Survey',
+      label: 'Execute Survey',
       action: 'navigateToSurvey',
     }]);
   },
