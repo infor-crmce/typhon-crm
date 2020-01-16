@@ -293,5 +293,10 @@ export default declare('crm.Views.Offline.Detail', [_DetailBase, _RelatedWidgetD
     view = this.app.getView(viewId);
     return view;
   },
-
+  hasAction: function hasAction(actionName) {
+    return typeof this._entityView[actionName] === 'function';
+  },
+  invokeAction: function invokeAction(actionName, parameters, evt, el) {
+    return this._entityView[actionName].apply(this._entityView, [parameters, evt, el]);
+  },
 });
