@@ -160,7 +160,7 @@
 >
 <surveyTake ""
   questionText: "Question"
-  titleText: "Choose Survey to Attempt"
+  titleText: "Choose Survey to Execute"
   surveyText: "Survey"
   questionTypeText: "Question Type"
 >

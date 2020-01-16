@@ -20,8 +20,8 @@ import Manager from 'argos/Models/Manager';
 import MODEL_TYPES from 'argos/Models/Types';
 import MODEL_NAMES from '../Names';
 
-const __class = declare('crm.Models.SurveyAccount.SData', [Base, _SDataModelBase], {
-  id: 'surveyAccount_sdata_model',
+const __class = declare('crm.Models.SurveyAnswer.SData', [Base, _SDataModelBase], {
+  id: 'surveyAnswer_sdata_model',
   createQueryModels: function createQueryModels() {
     return [{
       name: 'list',
