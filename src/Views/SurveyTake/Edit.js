@@ -152,6 +152,13 @@ const __class = declare('crm.Views.SurveyTake.Edit', [Edit], {
             field.setValue(answer.Answer);
             field.disable();
           }
+        } else if (name.startsWith('question-') && this._prevResults) {
+          const questionId = name.split('-')[1];
+          const productId = name.split('-')[2];
+          const answer = this._prevResults.SurveyAnswers.$resources.find(pro => pro.SurveyQuestionId === questionId && pro.SurveyProductId === productId);
+          if (answer) {
+            field.setValue(answer.Answer);
+          }
         }
         field.renderTo(node);
 
