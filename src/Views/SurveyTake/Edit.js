@@ -61,7 +61,6 @@ const __class = declare('crm.Views.SurveyTake.Edit', [Edit], {
     this.titleText = arguments[0].title;
 
     $(this.contentNode).empty();
-    this.getProducts();
 
     const deferredArray = [];
     deferredArray.push(this.getProducts());
