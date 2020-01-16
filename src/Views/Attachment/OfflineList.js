@@ -121,7 +121,8 @@ const __class = declare('crm.Views.Attachment.OfflineList', [List, _RightDrawerL
   },
   navigateToEditView: function navigateToEditView(action, selection) {
     const service = App.getService(this.serviceName);
-    const baseUrl = utility.stripQueryArgs(service.getUri().toString());
+    let baseUrl = utility.stripQueryArgs(service.getUri().toString());
+    baseUrl = baseUrl.replace('dynamic', 'system');
     this._fileManager.uploadOfflineFile(selection.data.fileName, baseUrl, null, null, null, null, null);
   },
   deleteNote: function deleteNote() {
