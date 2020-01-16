@@ -1147,6 +1147,7 @@
   descriptionText: "Description"
   entityText: "Payment Item"
   addDistributionActionText: "Add Distribution"
+  addPaymentActionText: "Add Payment"
   applyPaymentActionText: "Apply Payment"
 >
 
@@ -1168,6 +1169,7 @@
   viewAccountActionText: "View Account"
   viewDistributionsActionText: "View Distributions"
   addDistributionActionText: "Add Distribution"
+  addPaymentActionText: "Add Payment"
 >
 <paymentDistributionEdit ""
   titleText: "Payment Distribution"
@@ -1182,6 +1184,8 @@
   descriptionText: "description"
   entityText: "Payment Item"
   invoicePaymentTypeLabelText: "Invoice"
+  addDistributionActionText: "Add Distribution"
+  addPaymentActionText: "Add Payment"
 >
 
 
@@ -1198,6 +1202,8 @@
   descriptionText: "description"
   entityText: "Payment Item"
   invoicePaymentTypeLabelText: "Invoice"
+  addDistributionActionText: "Add Distribution"
+  addPaymentActionText: "Add Payment"
 >
 
 <paymentDistributionList ""
@@ -1212,6 +1218,8 @@
   moreDetailsText: "More Details"
   descriptionText: "description"
   entityText: "Payment Items"
+  addDistributionActionText: "Add Distribution"
+  addPaymentActionText: "Add Payment"
 >
 <paymentEdit ""
   titleText: "Payment"
@@ -1227,5 +1235,7 @@
   moreDetailsText: "More Details"
   descriptionText: "description"
   entityText: "Payment Item"
+  addDistributionActionText: "Add Distribution"
+  addPaymentActionText: "Add Payment"
 >
 

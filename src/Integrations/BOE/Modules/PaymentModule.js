@@ -21,6 +21,7 @@ import PaymentDetail from '../Views/Payment/Detail';
 import PaymentList from '../Views/Payment/List';
 import AccountList from '../../../Views/Account/List';
 import PaymentDistributionList from '../Views/PaymentDistribution/List';
+import SelectList from '../../../Views/SelectList';
 import '../Models/Payment/Offline';
 import '../Models/Payment/SData';
 import getResource from 'argos/I18n';
@@ -31,9 +32,66 @@ const __class = declare('crm.Integrations.BOE.Modules.Payment', [_Module], {
   },
   loadViews: function loadViews() {
     const am = this.applicationModule;
-    const thisModule = this;
     am.registerView(new PaymentEdit({
       expose: false,
+    }));
+    am.registerView(new SelectList({
+      itemTemplate: new Simplate([
+        '<p class="listview-heading" {% if( ($.hideWhenOffLine && !$$.app.isOnline())) { %} disabled{% } %}>{%: $.$descriptor %}</p> ',
+      ]),
+      id: 'payment_select_list',
+      refreshRequiredFor: function refreshRequiredFor() {
+        return true;
+      },
+      requestData: function requestData() {
+        const mixin = {
+          data: [],
+          index: {},
+          idProperty: '$key',
+        };
+        mixin.data.push({
+          $key: 'Check',
+          $descriptor: 'Check',
+        });
+        mixin.data.push({
+          $key: 'Cash',
+          $descriptor: 'Cash',
+        });
+        if (App.isOnline()) {
+          mixin.data.push({
+            $key: 'Credit',
+            $descriptor: 'Credit',
+            hideWhenOffLine: true,
+          });
+        }
+        const store = lang.mixin(this.get('store'), mixin);
+
+        if (!store && !this._model) {
+          console.warn('Error requesting data, no store was defined. Did you mean to mixin _SDataListMixin to your list view?'); // eslint-disable-line
+          return null;
+        }
+
+        if (this.searchWidget) {
+          this.currentSearchExpression = this.searchWidget.getSearchExpression();
+        }
+
+        this._setLoading();
+
+        let queryOptions = {};
+        queryOptions = this._applyStateToQueryOptions(queryOptions) || queryOptions;
+        const queryExpression = this._buildQueryExpression() || null;
+        const queryResults = this.requestDataUsingStore(queryExpression, queryOptions);
+
+        $.when(queryResults)
+          .done((results) => {
+            this._onQueryComplete(queryResults, results);
+          })
+          .fail(() => {
+            this._onQueryError(queryResults, queryOptions);
+          });
+
+        return queryResults;
+      },
     }));
     am.registerView(new PaymentEdit({
       id: 'payment_insert',
@@ -55,37 +113,13 @@ const __class = declare('crm.Integrations.BOE.Modules.Payment', [_Module], {
     }));
     am.registerView(new PaymentDetail({
       expose: false,
-      onAddDistributionClick: function onAddDistributionClick() {
-        const key = this.options.key;
-        const data = this.options.fromContext.entries;
-        if (!!key && !!data) {
-          const dataContext = { data: data[key] };
-          thisModule._onAddDistributionClick(arguments[0], dataContext);
-        }
-      },
     }));
     am.registerView(new PaymentList({
       expose: true,
-      onAddDistributionClick: function onAddDistributionClick() {
-        const key = arguments[1].data.$key;
-        const data = this.entries;
-        if (!!key && !!data) {
-          const dataContext = { data: data[key] };
-          thisModule._onAddDistributionClick(arguments[0], dataContext);
-        }
-      },
     }));
     am.registerView(new PaymentList({
-      expose: true,
+      expose: false,
       id: 'account_payment_related',
-      onAddDistributionClick: function onAddDistributionClick() {
-        const key = arguments[1].data.$key;
-        const data = this.entries;
-        if (!!key && !!data) {
-          const dataContext = { data: data[key] };
-          thisModule._onAddDistributionClick(arguments[0], dataContext);
-        }
-      },
     }));
 
     am.registerView(new AccountList({
@@ -101,24 +135,6 @@ const __class = declare('crm.Integrations.BOE.Modules.Payment', [_Module], {
       groupsEnabled: false,
       expose: false,
     }));
-  },
-  _onAddDistributionClick: function _onAddDistributionClick(actionContext, dataContext) {
-    const view = App.getView('payment_distribution_insert');
-    const data = {
-      Payment: {
-        $key: dataContext.data.$key,
-        PaymentId: dataContext.data.$key,
-      },
-      AppliedAmount: dataContext.data.Amount,
-    };
-    if (view) {
-      view.show({
-        entry: data,
-        fromContext: this,
-        inserting: true,
-        insert: true,
-      });
-    }
   },
   loadCustomizations: function loadCustomizations() {
     const am = this.applicationModule;
