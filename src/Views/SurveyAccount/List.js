@@ -49,7 +49,7 @@ const __class = declare('crm.Views.SurveyAccount.List', [List, _RightDrawerListM
   joinFields: function joinFields(sep, fields) {
     return utility.joinFields(sep, fields);
   },
-  titleText: 'Survey Accounts',
+  titleText: 'Admin: Survey Accounts',
 
   // View Properties
   itemIconClass: 'spreadsheet',

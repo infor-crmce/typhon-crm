@@ -100,7 +100,7 @@
 >
 
 <surveyList ""
-  titleText: "Surveys"
+  titleText: "Admin: Surveys"
   offlineText: "Offline"
 >
 <surveyEdit ""
@@ -116,7 +116,7 @@
 >
 
 <surveyProductList ""
-  titleText: "Survey Product"
+  titleText: "Admin: Survey Product"
   offlineText: "Offline"
 >
 <surveyProductEdit ""
@@ -148,7 +148,7 @@
   relatedItemsText: "Related Items"
 >
 <surveyQuestionList ""
-  titleText: "Survey Question"
+  titleText: "Admin: Survey Question"
   questionText: "Question"
   offlineText: "Offline"
 >
@@ -160,7 +160,7 @@
 >
 <surveyTake ""
   questionText: "Question"
-  titleText: "Choose Survey to Execute"
+  titleText: "Admin: Choose Survey to Execute"
   surveyText: "Survey"
   questionTypeText: "Question Type"
 >
