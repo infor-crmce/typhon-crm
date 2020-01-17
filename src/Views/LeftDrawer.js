@@ -67,7 +67,7 @@ const __class = declare('crm.Views.LeftDrawer', [GroupedList], /** @lends crm.Vi
   configurationView: 'configure',
   addAccountContactView: 'add_account_contact',
   searchView: 'speedsearch_list',
-
+  greyPersonalization: false,
   initSoho: function initSoho() {
     this.inherited(initSoho, arguments);
     this.accordion.element.on('selected', (evt, header) => {
@@ -229,8 +229,10 @@ const __class = declare('crm.Views.LeftDrawer', [GroupedList], /** @lends crm.Vi
         enableOfflineSupport: false,
       }, {
         name: 'ConnectionIndicator',
-        title: string.substitute(this.connectionText, { connectionStatus: App.onLine ? this.onlineText : this.offlineText }),
+        title: string.substitute(this.connectionText, {
+          connectionStatus: App.onLine && !this.greyPersonalization ? this.onlineText : this.offlineText }),
         enableOfflineSupport: true,
+        action: 'changeTheme',
       }, {
         name: 'AboutAction',
         title: this.aboutText,
@@ -241,6 +243,25 @@ const __class = declare('crm.Views.LeftDrawer', [GroupedList], /** @lends crm.Vi
     layout.push(footer);
 
     return layout;
+  },
+  changeTheme: function changeTheme(e) {
+    this.greyPersonalization = !this.greyPersonalization;
+
+    if (!this.greyPersonalization) {
+      this._changePersonalization('colorId', 'uplift');
+      this._changePersonalization('color', '#39135d');
+      $('html').data().personalize.element.data('personalize').setColors('#39135d');
+      $('span', e.$source).text('Connection: Online');
+    } else {
+      this._changePersonalization('colorId', 'graphite');
+      this._changePersonalization('color', '#787d82');
+      $('html').data().personalize.element.data('personalize').setColors('#787d82');
+      $('span', e.$source).text('Connection: Offline');
+    }
+  },
+  _changePersonalization: function changeColor(mode, value) {
+    App.preferences[mode] = value && value.nodeValue;
+    App.persistPreferences();
   },
   showAbout: function showAbout() {
     $('body').about({
