@@ -31,13 +31,13 @@ import Edit from 'argos/Edit';
  * @requires crm.Validator
  * @requires crm.Template
  */
-const __class = declare('crm.Views.TicketProduct.Edit', [Edit], {
+const __class = declare('crm.Views.TicketReturn.Edit', [Edit], {
 
 
   // View Properties
-  entityName: 'ticketProducts',
-  id: 'ticketProducts_edit',
-  resourceKind: 'ticketAccountProducts',
+  entityName: 'ticketReturns',
+  id: 'ticketreturn_edit',
+  resourceKind: 'returns',
   querySelect: [
     // 'ActualId',
     'ProductName',
@@ -100,7 +100,7 @@ const __class = declare('crm.Views.TicketProduct.Edit', [Edit], {
   },
   _refershTicketViews: function _refershTicketViews() {
     const views = [
-      App.getView('ticketproduct_list'),
+      App.getView('ticketreturn_list'),
       App.getView('ticket_detail'),
       App.getView('ticket_list'),
     ];
@@ -126,57 +126,48 @@ const __class = declare('crm.Views.TicketProduct.Edit', [Edit], {
           textProperty: 'Name',
           view: 'ticket_list',
           validator: validator.exists,
-        },
-        {
-          name: 'ProductId',
-          property: 'ProductId',
-          type: 'hidden',
         }, {
-          label: 'Asset',
-          name: 'AccountProduct',
-          property: 'AccountProduct',
+          label: 'Account',
+          name: 'Account',
+          property: 'Account',
+          textProperty: 'AccountName',
           type: 'lookup',
-          textProperty: 'Name',
-          view: 'accountproduct_list',
-          validator: validator.exists,
+          view: 'account_related',
+        }, {
+          //    label: 'Contact',
+          //  name: 'Contact',
+          //  property: 'Contact',
+          //    type: 'lookup',
+          //    textProperty: 'Name',
+          //    view: 'contact_list',
+          //    validator: validator.exists,
+          // }, {
+          label: 'Type',
+          name: 'Type',
+          property: 'Type',
+          picklist: 'Return Type',
+          title: 'Type',
+          type: 'picklist',
+        }, {
+          label: 'Status',
+          name: 'Status',
+          property: 'Status',
+          picklist: 'Return Status',
+          title: 'Status',
+          type: 'picklist',
+        }, {
+          label: 'Priority',
+          name: 'Priority',
+          property: 'Priority',
+          picklist: 'Return Priority',
+          title: 'Priority',
+          type: 'picklist',
+        }, {
+          label: 'Reason',
+          name: 'Product.Family',
+          property: 'Product.Family',
+          type: 'text',
         },
-      //      {
-      //  label: this.productFamilyText,
-      //  name: 'Product.Family',
-      //  property: 'Product.Family',
-      //  type: 'text',
-      //  readonly: true,
-      // }, {
-      //  label: this.priceLevelText,
-      //  name: 'Program',
-      //  property: 'Program',
-      //  textProperty: 'Program',
-      //  type: 'lookup',
-      //  view: 'productprogram_related',
-      //  validator: validator.exists,
-      //  where: (function where() {
-      //    const val = this.fields.Product.getValue();
-      //    return `Product.Name eq "${Utility.escapeSearchQuery(val.Name)}"`;
-      //  }).bindDelegate(this),
-      // }, {
-      //  label: App.hasMultiCurrency() ? this.basePriceText : this.priceText,
-      //  name: 'Price',
-      //  property: 'Price',
-      //  type: 'multiCurrency',
-      //  readonly: true,
-      // }, {
-      //  label: this.discountText,
-      //  name: 'Discount',
-      //  property: 'Discount',
-      //  type: 'decimal',
-      //  notificationTrigger: 'blur',
-      // }, {
-      //  label: this.quantityText,
-      //  name: 'Quantity',
-      //  property: 'Quantity',
-      //  type: 'decimal',
-      //  notificationTrigger: 'blur',
-      //      }
       ],
     };
 
@@ -196,6 +187,7 @@ const __class = declare('crm.Views.TicketProduct.Edit', [Edit], {
     //    readonly: true,
     //  });
     // }
+
     // const adjustedPrice = {
     //  title: this.adjustedPriceSectionText,
     //  name: 'OpportunityProductAdjustedPriceEdit',

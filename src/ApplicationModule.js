@@ -111,6 +111,7 @@ import OpportunityProductDetail from './Views/OpportunityProduct/Detail';
 import OpportunityProductEdit from './Views/OpportunityProduct/Edit';
 import OwnerList from './Views/Owner/List';
 import ProductList from './Views/Product/List';
+import ProductEdit from './Views/Product/Edit';
 import ProductProgramList from './Views/ProductProgram/List';
 import TicketList from './Views/Ticket/List';
 import TicketDetail from './Views/Ticket/Detail';
@@ -141,6 +142,9 @@ import OfflineOptionsEdit from './Views/OfflineOptions/Edit';
 import LanguageOptionsEdit from './Views/LanguageOptions/Edit';
 import TicketProductsEdit from './Views/TicketProduct/Edit';
 import TicketProductList from './Views/TicketProduct/List';
+import AccountProductList from './Views/TicketProduct/AccountProductList';
+import TicketReturnList from './Views/TicketReturn/List';
+import TicketReturnEdit from './Views/TicketReturn/Edit';
 
 import getResource from 'argos/I18n';
 import MODEL_NAMES from './Models/Names';
@@ -446,6 +450,15 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
       },
     }));
     this.registerView(new TicketProductsEdit());
+    this.registerView(new AccountProductList({
+      expose: false,
+    }));
+    this.registerView(new TicketReturnList({
+      expose: false,
+    }));
+    this.registerView(new TicketReturnEdit({
+      expose: false,
+    }));
 
     this.registerView(new OpportunityProductList({
       id: 'opportunityproduct_related',
@@ -462,6 +475,10 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
 
     this.registerView(new OpportunityProductEdit({
       id: 'opportunityproduct_edit',
+      expose: false,
+    }));
+    this.registerView(new ProductEdit({
+      id: 'product_edit',
       expose: false,
     }));
 

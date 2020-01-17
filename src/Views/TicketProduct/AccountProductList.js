@@ -26,35 +26,47 @@ import List from 'argos/List';
  *
  * @requires crm.Format
  */
-const __class = declare('crm.Views.TicketProduct.List', [List], {
+const __class = declare('crm.Views.AccountProduct.List', [List], {
   // Templates
   itemTemplate: new Simplate([
-    '<p class="listview-heading">{%: $.AccountProduct.ProductName %}</p>',
-    '<p class="micro-text">',
-    '{%: $.AccountProduct.ActualId %}',
-    '</p>',
+    '<p> {%: $.ProductName %}</p>',
+    // '<p class="micro-text">',
+    // '{% if ($.Product) { %} {%: $.Product.Family %} | {% } %}',
+    // '{%: $.Program %} | {%: crm.Format.currency($.Price) %}',
+    // '</p>',
+    // '<p class="micro-text">',
+    // '{%: $.Quantity %} x {%: crm.Format.currency($.CalculatedPrice) %} ',
+    // '({%: crm.Format.percent($.Discount) %}) = ',
+    // '<strong>',
+    // '{% if (App.hasMultiCurrency()) { %}',
+    // '{%: crm.Format.multiCurrency($.ExtendedPrice, App.getBaseExchangeRate().code) %}',
+    // '{% } else { %}',
+    // '{%: crm.Format.currency($.ExtendedPrice) %}',
+    // '{% } %}',
+    // '</strong>',
+    // '</p>',
   ]),
 
   // Localization
   titleText: 'Ticket Product',
 
   // View Properties
-  id: 'ticketproduct_list',
+  id: 'accountproduct_list',
   security: 'Entities/Opportunity/View',
   detailView: 'ticketproduct_detail',
   insertView: 'ticketProducts_edit',
   // queryOrderBy: 'Sort',
   querySelect: [
-    // 'Description',
-    // 'Name',
-    // 'Family',
-    // 'Price',
+    'ProductName',
+    // 'Product/Family',
     // 'Program',
-    // 'FixedCost',
-    'Id', '$key', 'AccountProduct/ProductName', 'AccountProduct/SerialNumber', 'AccountProduct/ActualId',
-    'AccountProduct/Evaluation',
+    // 'Price',
+    // 'Discount',
+    // 'CalculatedPrice',
+    // 'Quantity',
+    // 'ExtendedPrice',
   ],
-  resourceKind: 'ticketAccountProducts', // 'accountproducts',
+  resourceKind: 'accountproducts', // 'accountproducts',
   allowSelection: true,
   enableActions: true,
 

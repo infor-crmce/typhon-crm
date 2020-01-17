@@ -202,7 +202,7 @@ const __class = declare('crm.Views.Ticket.Detail', [Detail], {
       }, {
         name: 'ReturnRelated',
         label: 'Returns',
-        view: 'ticketproduct_list', // 'ticketreturn_related', ToDo
+        view: 'ticketreturn_list',
         where: this.formatRelatedQuery.bindDelegate(this, 'Ticket.Id eq "${0}"'),
       }],
     }]);

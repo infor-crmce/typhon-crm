@@ -26,35 +26,30 @@ import List from 'argos/List';
  *
  * @requires crm.Format
  */
-const __class = declare('crm.Views.TicketProduct.List', [List], {
+const __class = declare('crm.Views.TicketReturn.List', [List], {
   // Templates
   itemTemplate: new Simplate([
-    '<p class="listview-heading">{%: $.AccountProduct.ProductName %}</p>',
+    '<p class="listview-heading">{%: $.Status %}</p>',
     '<p class="micro-text">',
-    '{%: $.AccountProduct.ActualId %}',
+    '{%: $.ReturnType %}',
     '</p>',
   ]),
 
   // Localization
-  titleText: 'Ticket Product',
+  titleText: 'Returns',
 
   // View Properties
-  id: 'ticketproduct_list',
+  id: 'ticketreturn_list',
   security: 'Entities/Opportunity/View',
   detailView: 'ticketproduct_detail',
-  insertView: 'ticketProducts_edit',
+  insertView: 'ticketreturn_edit',
   // queryOrderBy: 'Sort',
   querySelect: [
-    // 'Description',
-    // 'Name',
-    // 'Family',
-    // 'Price',
-    // 'Program',
-    // 'FixedCost',
-    'Id', '$key', 'AccountProduct/ProductName', 'AccountProduct/SerialNumber', 'AccountProduct/ActualId',
-    'AccountProduct/Evaluation',
+    'Id', '$key', 'ReturnNumber', 'CreateDate', 'Status', 'ReturnType', 'Priority',
+    // 'Id', '$key', 'AccountProduct/ProductName', 'AccountProduct/SerialNumber', 'AccountProduct/ActualId',
+    // 'AccountProduct/Evaluation'
   ],
-  resourceKind: 'ticketAccountProducts', // 'accountproducts',
+  resourceKind: 'returns', // 'accountproducts',
   allowSelection: true,
   enableActions: true,
 
