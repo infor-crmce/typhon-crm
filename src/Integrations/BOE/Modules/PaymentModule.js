@@ -57,13 +57,14 @@ const __class = declare('crm.Integrations.BOE.Modules.Payment', [_Module], {
           $key: 'Cash',
           $descriptor: 'Cash',
         });
-        if (App.isOnline()) {
-          mixin.data.push({
-            $key: 'Credit',
-            $descriptor: 'Credit',
-            hideWhenOffLine: true,
-          });
-        }
+        // removed for POC demo
+        // if (App.isOnline()) {
+        //   mixin.data.push({
+        //     $key: 'Credit',
+        //     $descriptor: 'Credit',
+        //     hideWhenOffLine: true,
+        //   });
+        // }
         const store = lang.mixin(this.get('store'), mixin);
 
         if (!store && !this._model) {

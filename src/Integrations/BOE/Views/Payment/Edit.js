@@ -49,28 +49,6 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
   init: function init() {
     this.inherited(init, arguments);
   },
-  createTypeList: function createTypeList() {
-    const list = [];
-
-    list.push({
-      $key: 'Check',
-      $descriptor: 'Check',
-    });
-    list.push({
-      $key: 'Cash',
-      $descriptor: 'Cash',
-    });
-    if (App.isOnline()) {
-      list.push({
-        $key: 'Credit',
-        $descriptor: 'Credit',
-        hideWhenOffLine: true,
-      });
-    }
-    return {
-      $resources: list,
-    };
-  },
   requestTemplate: function requestTemplate() {
     if (App.isOnline()) {
       this.inherited(arguments);
@@ -129,7 +107,6 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
         requireSelection: true,
         valueKeyProperty: false,
         valueTextProperty: false,
-        data: this.createTypeList(),
         required: true,
         validator: validator.exists,
       }, {
