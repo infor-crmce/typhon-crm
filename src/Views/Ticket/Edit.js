@@ -283,6 +283,79 @@ const __class = declare('crm.Views.Ticket.Edit', [Edit], {
   includeIfValueExists: function includeIfValueExists(value) {
     return value;
   },
+  requestTemplate: function requestTemplate() {
+    // if (App.isOnline()) {
+    //   this.inherited(arguments);
+    // } else {
+    this.onRequestTemplateSuccess();
+    return {
+      $httpStatus: 200,
+      $descriptor: '',
+      AccountProductId: null,
+      AddKnowledge: false,
+      Alert: null,
+      AlternateKeyPrefix: null,
+      AlternateKeySuffix: null,
+      Area: null,
+      AssignedDate: '/Date(1579300460676)/',
+      Category: null,
+      Closed: null,
+      ClosedOnFirst: false,
+      CompletedDate: null,
+      CreateDate: null,
+      CreateUser: null,
+      First: false,
+      IncidentUsed: null,
+      Issue: null,
+      ModifyDate: null,
+      ModifyUser: null,
+      NeededByDate: '/Date(1579528820676)/',
+      Notes: null,
+      Priority: null,
+      PublicAccessCode: 'k6UJ9A0000OW',
+      ReceivedDate: '/Date(1579300460676)/',
+      StatusCode: 'k6UJ9A000039',
+      Subject: null,
+      SubmitSearch: false,
+      UrgencyCode: '3',
+      ViaCode: null,
+      Weightcode: null,
+      TicketNumber: null,
+      CreateSource: null,
+      CompletedByNeededDate: false,
+      Account: null,
+      Contact: null,
+      Contract: null,
+      AccountProducts: {},
+      AssignedTo: {
+        $key: 'SYST00000001',
+        $url: 'https://10.46.73.132:60940/sdata/slx/dynamic/-/owners(\'SYST00000001\')',
+        $lookup: 'https://10.46.73.132:60940/sdata/slx/dynamic/-/owners?format=json',
+      },
+      CompletedBy: null,
+      Owner: {
+        $key: 'SYST00000001',
+        $url: 'https://10.46.73.132:60940/sdata/slx/dynamic/-/owners(\'SYST00000001\')',
+        $lookup: 'https://10.46.73.132:60940/sdata/slx/dynamic/-/owners?format=json',
+      },
+      ReceivedBy: {
+        $key: 'SYST00000001',
+        $url: 'https://10.46.73.132:60940/sdata/slx/dynamic/-/owners(\'SYST00000001\')',
+        $lookup: 'https://10.46.73.132:60940/sdata/slx/dynamic/-/owners?format=json',
+      },
+      Returns: {},
+      TicketActivities: {},
+      TicketDefects: {},
+      TicketHistory: {},
+      Urgency: {
+        $key: 'QLYMAA0001O4',
+        $url: 'https://10.46.73.132:60940/sdata/slx/dynamic/-/urgencies(\'QLYMAA0001O4\')',
+        $lookup: 'https://10.46.73.132:60940/sdata/slx/dynamic/-/urgencies?format=json',
+      },
+      TicketProblem: {},
+      TicketSolution: {},
+    };
+  },
   createLayout: function createLayout() {
     return this.layout || (this.layout = [{
       label: this.accountText,
