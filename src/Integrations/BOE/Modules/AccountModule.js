@@ -814,15 +814,17 @@ const __class = declare('crm.Integrations.BOE.Modules.AccountModule', [_Module],
       }, {
         name: 'AddDistribution',
         label: 'Add Distribution',
-        iconClass: 'expense-report', // 'document2',
+        iconClass: 'expense-report',
         action: '_onAddDistributionClick',
         security: 'Entities/PaymentDistribution/Add',
+        enableOffline: true,
       }, {
         name: 'AddPayment',
         label: 'Add Payment',
         iconClass: 'finance',
         action: '_onAddPaymentClick',
         security: 'Entities/Payment/Add',
+        enableOffline: true,
       }],
     });
 

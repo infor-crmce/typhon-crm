@@ -17,6 +17,7 @@ import declare from 'dojo/_base/declare';
 import lang from 'dojo/_base/lang';
 import format from 'crm/Format';
 import Detail from 'argos/Detail';
+import PaymentUtility from '../../PaymentUtility';
 import MODEL_NAMES from '../../Models/Names';
 import getResource from 'argos/I18n';
 
@@ -39,6 +40,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Detail', [Detail], /
   addDistributionActionText: resource.addDistributionActionText,
   amountLabelText: resource.amountLabelText,
   applyPaymentActionText: resource.applyPaymentActionText,
+  addPaymentActionText: resource.addPaymentActionText,
 
   editView: 'payment_edit',
   insertView: 'payment_insert',
@@ -48,23 +50,65 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Detail', [Detail], /
   modelName: MODEL_NAMES.PAYMENT,
   resourceKind: 'payments',
   enableOffline: true,
+
+  constructor: function constructor(args) {
+    declare.safeMixin(this, args);
+  },
+
+  onAddDistributionClick: function onAddDistributionClick() {
+    if (this.entry) {
+      const dataContext = { data: this.entry };
+      PaymentUtility.GoToAddDistribution(arguments[0], dataContext);
+    }
+  },
+  preNavigateToInsertView: function preNavigateToInsertView(additionalOptions) {
+    const view = this.app.getView(this.insertView || this.editView);
+    let options = {
+      detailView: this.detailView,
+      returnTo: this.id,
+      insert: true,
+    };
+
+    // Pass along the selected entry (related list could get it from a quick action)
+    if (this.options && this.options.selectedEntry) {
+      options.selectedEntry = this.options.selectedEntry;
+    }
+
+    if (additionalOptions) {
+      options = lang.mixin(options, additionalOptions);
+    }
+
+    if (view) {
+      view.show(options);
+    }
+  },
   createLayout: function createLayout() {
     return this.layout || (this.layout = [{
       title: this.actionsText,
       list: true,
       cls: 'action-list',
       name: 'QuickActionsSection',
+      enableOffline: true,
       children: [{
         id: 'addDistribution',
         iconClass: 'expense-report',
         label: this.addDistributionActionText,
         enabled: true,
         action: 'onAddDistributionClick',
+        enableOffline: true,
+      }, {
+        id: 'addPayment',
+        iconClass: 'add',
+        label: this.addPaymentActionText,
+        enabled: true,
+        action: 'preNavigateToInsertView',
+        enableOffline: true,
       }, {
         id: 'applyPayment',
         iconClass: 'finance',
         label: this.applyPaymentActionText,
         enabled: true,
+        enableOffline: true,
         action: 'onApplyPaymentClick',
       }],
     }, {

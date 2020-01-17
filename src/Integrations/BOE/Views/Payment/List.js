@@ -20,6 +20,7 @@ import List from 'argos/List';
 import format from 'crm/Format';
 import _ListOfflineMixin from 'argos/Offline/_ListOfflineMixin';
 import _RightDrawerListMixin from 'crm/Views/_RightDrawerListMixin';
+import PaymentUtility from '../../PaymentUtility';
 import MODEL_NAMES from '../../Models/Names';
 import utility from '../../Utility';
 import getResource from 'argos/I18n';
@@ -69,7 +70,14 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
   enableDynamicGroupLayout: false,
   groupsEnabled: false,
   entityName: 'Payment',
-
+  onAddDistributionClick: function onAddDistributionClick() {
+    const key = arguments[1].data.$key;
+    const data = this.entries;
+    if (!!key && !!data) {
+      const dataContext = { data: data[key] };
+      PaymentUtility.GoToAddDistribution(arguments[0], dataContext);
+    }
+  },
   // Card layout
   itemIconClass: 'finance',
   createActionLayout: function createActionLayout() {
@@ -82,6 +90,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
         keyProperty: 'Account.$key',
         textProperty: 'Account.AccountName',
       }),
+      enableOffline: true,
     }, {
       id: 'viewDistribution',
       label: this.viewDistributionsActionText,
@@ -91,17 +100,20 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
         keyProperty: 'PaymentId',
         textProperty: 'PaymentId',
       }),
+      enableOffline: true,
     }, {
       id: 'addDistribution',
       label: this.addDistributionActionText,
       enabled: true,
       action: 'onAddDistributionClick',
+      enableOffline: true,
     }, {
       id: 'edit',
       cls: 'edit',
       label: this.editActionText,
       security: 'Entities/Payment/Edit',
       action: 'navigateToEditView',
+      enableOffline: true,
     }]);
   },
   getTitle: function getTitle(entry) {

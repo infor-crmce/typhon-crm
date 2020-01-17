@@ -64,11 +64,36 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
       list.push({
         $key: 'Credit',
         $descriptor: 'Credit',
+        hideWhenOffLine: true,
       });
     }
     return {
       $resources: list,
     };
+  },
+  requestTemplate: function requestTemplate() {
+    if (App.isOnline()) {
+      this.inherited(arguments);
+    } else {
+      return {
+        $httpStatus: 200,
+        $descriptor: '',
+        PaymentId: null,
+        CreateUser: null,
+        CreateDate: null,
+        ModifyUser: null,
+        ModifyDate: null,
+        SeccodeId: null,
+        PaymentDate: null,
+        ReferenceNumber: null,
+        Description: null,
+        Amount: null,
+        Type: null,
+        AccountId: null,
+        Account: null,
+        PaymentDistributions: {},
+      };
+    }
   },
   accountLookupWhere: function accountLookupWhere() {
     return '';
@@ -79,6 +104,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
       list: true,
       cls: 'action-list',
       name: 'QuickActionsSection',
+      enableOffline: true,
       children: [],
     }, {
       title: this.detailsText,
@@ -99,7 +125,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
         property: 'Type',
         label: this.typeLabelText,
         type: 'select',
-        view: 'select_list',
+        view: 'payment_select_list',
         requireSelection: true,
         valueKeyProperty: false,
         valueTextProperty: false,

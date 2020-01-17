@@ -60,6 +60,29 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
       $resources: list,
     };
   },
+  requestTemplate: function requestTemplate() {
+    if (App.isOnline()) {
+      this.inherited(arguments);
+    } else {
+      return {
+        $httpStatus: 200,
+        $descriptor: '',
+        PaymentDistributionId: null,
+        CreateUser: null,
+        CreateDate: null,
+        ModifyUser: null,
+        ModifyDate: null,
+        SeccodeId: null,
+        PaymentId: null,
+        InvoiceId: null,
+        Type: null,
+        AppliedAmount: null,
+        AppliedDate: null,
+        ERPInvoice: null,
+        Payment: null,
+      };
+    }
+  },
   paymentLookupWhere: () => '',
   invoiceLookupWhere: () => '',
   createLayout: function createLayout() {
@@ -69,6 +92,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
       cls: 'action-list',
       name: 'QuickActionsSection',
       children: [],
+      enableOffline: true,
     }, {
       title: this.detailsText,
       name: 'DetailsSection',
