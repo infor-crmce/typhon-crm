@@ -126,6 +126,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Detail', [Detail], /
         name: 'Amount',
         property: 'Amount',
         label: this.amountLabelText,
+        renderer: format.currency.bindDelegate(this),
       }, {
         name: 'PaymentDate',
         property: 'PaymentDate',
