@@ -21,6 +21,7 @@ import action from 'crm/Action';
 import _RightDrawerListMixin from 'crm/Views/_RightDrawerListMixin';
 import _MetricListMixin from 'crm/Views/_MetricListMixin';
 import _GroupListMixin from 'crm/Views/_GroupListMixin';
+import _ListOfflineMixin from 'argos/Offline/_ListOfflineMixin';
 import MODEL_NAMES from '../../Models/Names';
 import MODEL_TYPES from 'argos/Models/Types';
 import getResource from 'argos/I18n';
@@ -28,7 +29,7 @@ import utility from '../../Utility';
 
 const resource = getResource('salesOrdersList');
 
-const __class = declare('crm.Integrations.BOE.Views.SalesOrders.List', [List, _RightDrawerListMixin, _MetricListMixin, _GroupListMixin], {
+const __class = declare('crm.Integrations.BOE.Views.SalesOrders.List', [List, _RightDrawerListMixin, _MetricListMixin, _ListOfflineMixin, _GroupListMixin], {
   formatter: format,
   util: utility,
   // Templates
@@ -72,6 +73,7 @@ const __class = declare('crm.Integrations.BOE.Views.SalesOrders.List', [List, _R
   resourceKind: 'salesOrders',
   allowSelection: true,
   enableActions: true,
+  enableOffline: true,
   detailView: 'salesorder_detail',
   insertView: 'salesorder_edit',
   security: 'Entities/SalesOrder/View',

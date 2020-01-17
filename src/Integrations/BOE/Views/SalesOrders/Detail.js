@@ -285,6 +285,7 @@ const __class = declare('crm.Integrations.BOE.Views.SalesOrders.Detail', [Detail
         action: 'addLineItems',
         security: 'Entities/SalesOrder/Add',
         disabled: this.isSalesOrderClosed.bind(this),
+        enableOffline: true,
       }, {
         name: 'RePrice',
         property: 'SalesOrderNumber',
