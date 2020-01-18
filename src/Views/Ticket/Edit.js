@@ -113,11 +113,11 @@ const __class = declare('crm.Views.Ticket.Edit', [Edit], {
     const entry = this.inherited(convertEntry, arguments);
 
     if (!this.options.entry) {
-      if (entry.StatusCode) {
+      if (entry && entry.StatusCode) {
         this.requestCodeData('name eq "Ticket Status"', entry.StatusCode, this.fields.StatusCode, entry, 'Status');
       }
 
-      if (entry.ViaCode) {
+      if (entry && entry.ViaCode) {
         this.requestCodeData('name eq "Source"', entry.ViaCode, this.fields.ViaCode, entry, 'SourceText');
       }
     }
@@ -127,7 +127,7 @@ const __class = declare('crm.Views.Ticket.Edit', [Edit], {
   processTemplateEntry: function processTemplateEntry(entry) {
     this.inherited(processTemplateEntry, arguments);
 
-    if (entry.StatusCode) {
+    if (entry && entry.StatusCode) {
       this.requestCodeData('name eq "Ticket Status"', entry.StatusCode, this.fields.StatusCode, entry, 'Status');
     }
   },
@@ -176,11 +176,11 @@ const __class = declare('crm.Views.Ticket.Edit', [Edit], {
   setValues: function setValues(entry) {
     this.inherited(setValues, arguments);
 
-    if (entry.SourceText) {
+    if (entry && entry.SourceText) {
       this.fields.ViaCode.setText(entry.SourceText);
     }
 
-    if (entry.Status) {
+    if (entry && entry.Status) {
       this.fields.StatusCode.setText(entry.Status);
     }
   },
