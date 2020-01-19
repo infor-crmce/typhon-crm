@@ -36,6 +36,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Detail',
   paymentLabelText: resource.paymentLabelText,
   invoiceLabelText: resource.invoiceLabelText,
   addDistributionActionText: resource.addDistributionActionText,
+  amountLeftLabelText: resource.amountLeftLabelText,
 
   editView: 'payment_distribution_edit',
   insertView: 'payment_distribution_insert',
@@ -104,7 +105,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Detail',
       }, {
         name: 'AmountLeft',
         property: 'PaymentTotals.AmountLeft',
-        label: this.paymentLabelText,
+        label: this.amountLeftLabelText,
         renderer: format.currency.bindDelegate(this),
       }, {
         name: 'ErpInvoice',
