@@ -164,6 +164,7 @@ const __class = declare('crm.Views.TicketActivity.Edit', [Edit], {
       property: 'AssignedDate',
       type: 'date',
       showTimePicker: true,
+      required: true,
       dateFormatText: (App.is24HourClock()) ? this.startingFormatText24 : this.startingFormatText,
       minValue: (new Date(1900, 0, 1)),
       validator: [
@@ -178,6 +179,7 @@ const __class = declare('crm.Views.TicketActivity.Edit', [Edit], {
       showTimePicker: true,
       dateFormatText: (App.is24HourClock()) ? this.startingFormatText24 : this.startingFormatText,
       minValue: (new Date(1900, 0, 1)),
+      required: true,
       validator: [
         validator.exists,
         validator.isDateInRange,

@@ -373,6 +373,7 @@ const __class = declare('crm.Views.Ticket.Edit', [Edit], {
       textProperty: 'NameLF',
       type: 'lookup',
       requireSelection: true,
+      required: true,
       validator: validator.exists,
       view: 'contact_related',
       where: this.formatAccountQuery.bindDelegate(this),
