@@ -125,6 +125,7 @@ const __class = declare('crm.Views.TicketReturn.Edit', [Edit], {
           type: 'lookup',
           textProperty: 'Name',
           view: 'ticket_list',
+          required: true,
           validator: validator.exists,
         }, {
           label: 'Account',
