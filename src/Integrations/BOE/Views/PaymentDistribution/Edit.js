@@ -18,7 +18,7 @@ import lang from 'dojo/_base/lang';
 // import connect from 'dojo/_base/connect';
 import Edit from 'argos/Edit';
 // import MODEL_NAMES from '../../Models/Names';
-// import format from 'crm/Format';
+import format from 'crm/Format';
 // import validator from 'crm/Validator';
 import getResource from 'argos/I18n';
 
@@ -43,6 +43,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
   paymentLabelText: resource.paymentLabelText,
   invoiceLabelText: resource.invoiceLabelText,
   invoicePaymentTypeLabelText: resource.invoicePaymentTypeLabelText,
+  amountLeftLabelText: resource.amountLeftLabelText,
   startingFormatText: dtFormatResource.startingFormatText,
   startingFormatText24: dtFormatResource.startingFormatText24,
 
@@ -61,30 +62,58 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
     };
   },
   requestTemplate: function requestTemplate() {
-    if (App.isOnline()) {
-      this.inherited(arguments);
-    } else {
-      return {
-        $httpStatus: 200,
-        $descriptor: '',
-        PaymentDistributionId: null,
-        CreateUser: null,
-        CreateDate: null,
-        ModifyUser: null,
-        ModifyDate: null,
-        SeccodeId: null,
-        PaymentId: null,
-        InvoiceId: null,
-        Type: null,
-        AppliedAmount: null,
-        AppliedDate: null,
-        ERPInvoice: null,
-        Payment: null,
-      };
-    }
+    // if (App.isOnline()) {
+    //   this.inherited(arguments);
+    // } else {
+    this.onRequestTemplateSuccess();
+    return {
+      $httpStatus: 200,
+      $descriptor: '',
+      PaymentDistributionId: null,
+      CreateUser: null,
+      CreateDate: null,
+      ModifyUser: null,
+      ModifyDate: null,
+      SeccodeId: null,
+      PaymentId: null,
+      InvoiceId: null,
+      Type: null,
+      AppliedAmount: null,
+      AppliedDate: null,
+      ERPInvoice: null,
+      Payment: null,
+    };
+    // }
   },
   paymentLookupWhere: () => '',
   invoiceLookupWhere: () => '',
+  applyContext: function applyContext() {
+    this.inherited(applyContext, arguments);
+
+    if (this.options) {
+      if (this.options.entry) {
+        if (!this.options.entry.Payment) {
+          this.options.entry.Payment = this.options.entry;
+        }
+        if (this.options.entry.PaymentTotals && this.options.entry.PaymentTotals.AmountLeft) {
+          this.options.entry.AppliedAmount = this.options.entry.PaymentTotals.AmountLeft;
+        }
+      }
+      if (this.options.selectedEntry) {
+        this.options.entry = {};
+        if (this.options.selectedEntry) {
+          this.options.entry.Payment = this.options.selectedEntry;
+        }
+        if (this.options.selectedEntry.PaymentTotals && this.options.selectedEntry.PaymentTotals.AmountLeft) {
+          this.options.entry.AppliedAmount = this.options.selectedEntry.PaymentTotals.AmountLeft;
+        }
+      }
+    }
+  },
+  show: function show() {
+    this.inherited(show, arguments);
+    this.fields.AmountLeft.disable();
+  },
   createLayout: function createLayout() {
     return this.layout || (this.layout = [{
       title: this.actionsText,
@@ -104,7 +133,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
         emptyText: '',
         autoFocus: true,
         required: true,
-        valueTextProperty: 'Payment.PaymentId',
+        valueTextProperty: 'ReferenceNumber',
         view: 'distribution_payment',
         where: entry => this.paymentLookupWhere(entry, this),
       }, {
@@ -114,7 +143,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
         type: 'lookup',
         emptyText: '',
         required: true,
-        valueTextProperty: 'ERPInvoice.InvoiceNumber',
+        valueTextProperty: 'InvoiceNumber',
         default: '',
         view: 'payment_distribution_invoice',
         where: entry => this.invoiceLookupWhere(entry, this),
@@ -154,6 +183,13 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
         dateFormatText: (App.is24HourClock()) ? this.startingFormatText24 : this.startingFormatText,
         minValue: (new Date(1900, 0, 1)),
         default: new Date(Date.now()),
+      }, {
+        name: 'AmountLeft',
+        property: 'PaymentTotals.AmountLeft',
+        type: 'text',
+        label: this.amountLeftLabelText,
+        // hidden: true,
+        renderer: format.currency.bindDelegate(this),
       }],
     }]);
   },

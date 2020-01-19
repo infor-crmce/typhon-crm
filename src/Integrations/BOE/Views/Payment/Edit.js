@@ -46,6 +46,17 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
   startingFormatText: dtFormatResource.startingFormatText,
   startingFormatText24: dtFormatResource.startingFormatText24,
 
+  actionPropertyTemplate: new Simplate([
+    '<div class="{%= $$.multiColumnClass %} columns{%= $.cls %}">',
+    '<label>{%: $.label %}</label>',
+    '<span class="data" hidden>',
+    '<a class="hyperlink" data-action="{%= $.action %}" {% if ($.disabled) { %}data-disable-action="true"{% } %} class="{% if ($.disabled) { %}disabled{% } %}">',
+    '{%= $.value %}',
+    '</a>',
+    '</span>',
+    '</div>',
+  ]),
+
   init: function init() {
     this.inherited(init, arguments);
   },
@@ -53,6 +64,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
     if (App.isOnline()) {
       this.inherited(arguments);
     } else {
+      this.onRequestTemplateSuccess();
       return {
         $httpStatus: 200,
         $descriptor: '',
@@ -76,6 +88,46 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
   accountLookupWhere: function accountLookupWhere() {
     return '';
   },
+  applyContext: function applyContext() {
+    this.inherited(applyContext, arguments);
+
+    if (this.options) {
+      if (this.options.entry) {
+        if (!this.options.entry.Account) {
+          if (!this.options.isPayment) {
+            this.options.entry.Account = this.options.entry;
+          }
+          this.options.entry.Account.$descriptor = this.options.entry.Account.$descriptor || this.options.entry.Account.AccountName;
+        }
+      }
+      if (this.options.selectedEntry) {
+        this.options.entry = {};
+        if (this.options.selectedEntry) {
+          if (!this.options.isPayment) {
+            this.options.entry.Account = this.options.selectedEntry;
+          } else {
+            this.options.entry = this.options.selectedEntry;
+          }
+          this.options.entry.Account.$descriptor = this.options.entry.Account.$descriptor || this.options.entry.Account.AccountName;
+        }
+      }
+    }
+  },
+  show: function show(options) {
+    this.inherited(show, arguments);
+    let entry = {};
+    this.fields.AmountLeft.disable();
+    if (options && options.entry) {
+      entry = options.entry;
+    } else {
+      if (options && options.selectedEntry) {
+        entry = { Account: options.selectedEntry };
+      }
+    }
+    if (this.inserting && entry && entry.Account) {
+      // this.fields.Account.disable();
+    }
+  },
   createLayout: function createLayout() {
     return this.layout || (this.layout = [{
       title: this.actionsText,
@@ -95,7 +147,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
         emptyText: '',
         autoFocus: true,
         required: true,
-        valueTextProperty: 'Account.AccountName',
+        valueTextProperty: 'AccountName',
         view: 'account_payments',
         where: entry => this.accountLookupWhere(entry, this),
       }, {
@@ -117,6 +169,12 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
         required: true,
         default: 0.00,
         validator: validator.exists,
+      }, {
+        name: 'AmountLeft',
+        property: 'PaymentTotals.AmountLeft',
+        type: 'decimal',
+        hidden: true,
+        label: 'Amount Left',
       }, {
         name: 'PaymentDate',
         property: 'PaymentDate',

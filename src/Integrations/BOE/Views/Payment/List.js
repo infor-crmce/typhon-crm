@@ -37,6 +37,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
     '<p class="micro-text"> {% if ($.Account) { %}<label class="group-label"> {%: $$.accountLabelText %}</label> {%: $.Account.AccountName %} {% } %}</p>',
     '<p class="micro-text"><label class="group-label">{%: $$.referenceNumberLabelText %}</label> {%: $.ReferenceNumber %}</p>',
     '<p class="micro-text"><label class="group-label">{%: $$.typeLabelText %}</label> {%: $.Type %}</p>',
+    '<p class="micro-text"><label class="group-label">{%: $$.amountLeftLabelText %}</label> {%: $$.formatter.currency($.PaymentTotals.AmountLeft) %}</p>',
   ]),
 
   // Localization
@@ -50,6 +51,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
   viewDistributionsActionText: resource.viewDistributionsActionText,
   addDistributionActionText: resource.addDistributionActionText,
   editActionText: resource.editActionText,
+  amountLeftLabelText: resource.amountLeftLabelText,
 
   // View Properties
   id: 'payment_list',
@@ -62,6 +64,7 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.List', [List, _Right
   enableActions: true,
   enableHashTags: true,
   enableOffline: true,
+  refreshRequired: true,
   expose: true,
   security: 'Entities/Payment/View',
   insertSecurity: 'Entities/Payment/Add',

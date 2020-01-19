@@ -29,6 +29,7 @@ const __class = declare('crm.Integrations.BOE.Models.Payment.SData', [Base, _SDa
       queryOrderBy: 'PaymentDate asc',
       querySelect: [
         'Account/AccountName',
+        'PaymentTotals/AmountLeft',
         'Amount',
         'Description',
         'PaymentDate',
@@ -39,6 +40,7 @@ const __class = declare('crm.Integrations.BOE.Models.Payment.SData', [Base, _SDa
       name: 'detail',
       querySelect: [
         'Account/AccountName',
+        'PaymentTotals/AmountLeft',
         'Amount',
         'Description',
         'PaymentDate',
@@ -52,6 +54,7 @@ const __class = declare('crm.Integrations.BOE.Models.Payment.SData', [Base, _SDa
       name: 'edit',
       querySelect: [
         'Account/AccountName',
+        'PaymentTotals/AmountLeft',
         'Amount',
         'Description',
         'PaymentDate',

@@ -34,7 +34,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.List', [
   itemTemplate: new Simplate([
     '<p class="listview-heading"><label class="group-label">{%: $$.paymentLabelText %}</label> {%: $.PaymentId %}</p>',
     '<p class="micro-text"> {% if ($.AppliedDate) { %}<label class="group-label">{%: $$.distributionDateLabelText %}</label> {%: $$.formatter.date($.AppliedDate) %} {% } %}</p>',
-    '<p class="micro-text"><label class="group-label">{%: $$.amountLabelText %}</label> {%: $.AppliedAmount %}</p>',
+    '<p class="micro-text"><label class="group-label">{%: $$.amountLabelText %}</label> {%: $$.formatter.currency($.AppliedAmount) %}</p>',
   ]),
 
   // Localization
@@ -56,6 +56,7 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.List', [
   enableActions: true,
   enableHashTags: true,
   enableOffline: true,
+  refreshRequired: true,
   expose: true,
   security: 'Entities/PaymentDistribution/View',
   insertSecurity: 'Entities/PaymentDistribution/Add',

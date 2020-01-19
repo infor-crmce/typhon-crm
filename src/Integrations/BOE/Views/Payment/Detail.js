@@ -42,6 +42,17 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Detail', [Detail], /
   applyPaymentActionText: resource.applyPaymentActionText,
   addPaymentActionText: resource.addPaymentActionText,
 
+  actionPropertyTemplate: new Simplate([
+    '<div class="{%= $$.multiColumnClass %} columns{%= $.cls %}">',
+    '<label>{%: $.label %}</label>',
+    '<span class="data" hidden>',
+    '<a class="hyperlink" data-action="{%= $.action %}" {% if ($.disabled) { %}data-disable-action="true"{% } %} class="{% if ($.disabled) { %}disabled{% } %}">',
+    '{%= $.value %}',
+    '</a>',
+    '</span>',
+    '</div>',
+  ]),
+
   editView: 'payment_edit',
   insertView: 'payment_insert',
 
@@ -64,14 +75,22 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Detail', [Detail], /
   preNavigateToInsertView: function preNavigateToInsertView(additionalOptions) {
     const view = this.app.getView(this.insertView || this.editView);
     let options = {
-      detailView: this.detailView,
+      detailView: this.detailView || this.id,
       returnTo: this.id,
       insert: true,
+      isPayment: true,
     };
 
     // Pass along the selected entry (related list could get it from a quick action)
-    if (this.options && this.options.selectedEntry) {
-      options.selectedEntry = this.options.selectedEntry;
+    if (this.options) {
+      if (this.options.selectedEntry) {
+        options.selectedEntry = this.options.selectedEntry || { Account: {} };
+      } else if (this.options.key && this.options.fromContext && this.options.fromContext.entries && this.options.fromContext.entries[this.options.key].Account) {
+        if (!options.selectedEntry) {
+          options.selectedEntry = { Account: {} };
+        }
+        options.selectedEntry.Account = this.options.fromContext.entries[this.options.key].Account;
+      }
     }
 
     if (additionalOptions) {
@@ -93,21 +112,18 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Detail', [Detail], /
         id: 'addDistribution',
         iconClass: 'expense-report',
         label: this.addDistributionActionText,
-        enabled: true,
         action: 'onAddDistributionClick',
         enableOffline: true,
       }, {
         id: 'addPayment',
         iconClass: 'add',
         label: this.addPaymentActionText,
-        enabled: true,
         action: 'preNavigateToInsertView',
         enableOffline: true,
       }, {
         id: 'applyPayment',
         iconClass: 'finance',
         label: this.applyPaymentActionText,
-        enabled: true,
         enableOffline: true,
         action: 'onApplyPaymentClick',
       }],
@@ -123,15 +139,20 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Detail', [Detail], /
         property: 'Type',
         label: this.typeLabelText,
       }, {
+        name: 'PaymentDate',
+        property: 'PaymentDate',
+        label: this.paymentDateLabelText,
+        renderer: format.date.bindDelegate(this, null, false),
+      }, {
         name: 'Amount',
         property: 'Amount',
         label: this.amountLabelText,
         renderer: format.currency.bindDelegate(this),
       }, {
-        name: 'PaymentDate',
-        property: 'PaymentDate',
-        label: this.paymentDateLabelText,
-        renderer: format.date.bindDelegate(this, null, false),
+        name: 'AmountLeft',
+        property: 'PaymentTotals.AmountLeft',
+        label: 'Amount Left',
+        renderer: format.currency.bindDelegate(this),
       }, {
         name: 'ReferenceNumber',
         property: 'ReferenceNumber',

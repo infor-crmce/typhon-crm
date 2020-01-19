@@ -51,6 +51,13 @@ const __class = declare('crm.Integrations.BOE.Models.Payment.Base', [_ModelBase]
       parentProperty: 'Payment',
       parentPropertyType: 'object',
       relatedEntity: 'PaymentDistribution',
+    }, {
+      name: 'PaymentTotals',
+      displayName: 'Payment Totals',
+      type: 'ManyToOne',
+      parentProperty: 'Payment',
+      parentPropertyType: 'object',
+      relatedEntity: 'PaymentTotals',
     }]);
     return rel;
   },

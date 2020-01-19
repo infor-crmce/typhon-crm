@@ -1149,6 +1149,7 @@
   addDistributionActionText: "Add Distribution"
   addPaymentActionText: "Add Payment"
   applyPaymentActionText: "Apply Payment"
+  amountLeftLabelText: "Amount Left"
 >
 
 <paymentList ""
@@ -1170,6 +1171,7 @@
   viewDistributionsActionText: "View Distributions"
   addDistributionActionText: "Add Distribution"
   addPaymentActionText: "Add Payment"
+  amountLeftLabelText: "Amount Left"
 >
 <paymentDistributionEdit ""
   titleText: "Payment Distribution"
@@ -1186,6 +1188,7 @@
   invoicePaymentTypeLabelText: "Invoice"
   addDistributionActionText: "Add Distribution"
   addPaymentActionText: "Add Payment"
+  amountLeftLabelText: "Amount Left"
 >
 
 
@@ -1204,6 +1207,7 @@
   invoicePaymentTypeLabelText: "Invoice"
   addDistributionActionText: "Add Distribution"
   addPaymentActionText: "Add Payment"
+  amountLeftLabelText: "Amount Left"
 >
 
 <paymentDistributionList ""
@@ -1220,6 +1224,7 @@
   entityText: "Payment Items"
   addDistributionActionText: "Add Distribution"
   addPaymentActionText: "Add Payment"
+  amountLeftLabelText: "Amount Left"
 >
 <paymentEdit ""
   titleText: "Payment"
@@ -1237,5 +1242,6 @@
   entityText: "Payment Item"
   addDistributionActionText: "Add Distribution"
   addPaymentActionText: "Add Payment"
+  amountLeftLabelText: "Amount Left"
 >
 

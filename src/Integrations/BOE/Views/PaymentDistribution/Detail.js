@@ -98,7 +98,12 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Detail',
       name: 'DetailsSection',
       children: [{
         name: 'Payment',
-        property: 'Payment.Amount',
+        property: 'PaymentId',
+        label: this.paymentLabelText,
+        renderer: format.currency.bindDelegate(this),
+      }, {
+        name: 'AmountLeft',
+        property: 'PaymentTotals.AmountLeft',
         label: this.paymentLabelText,
         renderer: format.currency.bindDelegate(this),
       }, {

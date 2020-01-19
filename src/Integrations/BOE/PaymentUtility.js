@@ -23,12 +23,18 @@ import lang from 'dojo/_base/lang';
 const __class = lang.setObject('crm.Integrations.BOE.PaymentUtility', /** @lends crm.Integrations.BOE.PaymentUtility */{
   GoToAddDistribution: function GoToAddDistribution(actionContext, dataContext) {
     const view = App.getView('payment_distribution_insert');
+    let AppliedAmount = dataContext.data.Amount;
+    if (dataContext.data.PaymentTotals && dataContext.data.PaymentTotals.AmountLeft) {
+      AppliedAmount = dataContext.data.PaymentTotals.AmountLeft;
+    }
     const data = {
       Payment: {
         $key: dataContext.data.$key,
         PaymentId: dataContext.data.$key,
+        ReferenceNumber: dataContext.data.ReferenceNumber,
+        Description: dataContext.data.Description,
       },
-      AppliedAmount: dataContext.data.Amount,
+      AppliedAmount,
     };
     if (view) {
       view.show({
