@@ -204,7 +204,7 @@ const __class = declare('crm.Views.Activity.List', [List, _RightDrawerListMixin]
   },
   createToolLayout: function createToolLayout() {
     this.inherited(createToolLayout, arguments);
-    if (this.tools && this.tools.tbar) {
+    if (this.tools && this.tools.tbar && !this.tools.tbar.find(c => c.id === 'newUnscheduled')) {
       this.tools.tbar.unshift({
         id: 'newUnscheduled',
         svg: 'add',
