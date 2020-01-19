@@ -61,29 +61,29 @@ const __class = declare('crm.Integrations.BOE.Views.Payment.Edit', [Edit], {
     this.inherited(init, arguments);
   },
   requestTemplate: function requestTemplate() {
-    if (App.isOnline()) {
-      this.inherited(arguments);
-    } else {
-      this.onRequestTemplateSuccess();
-      return {
-        $httpStatus: 200,
-        $descriptor: '',
-        PaymentId: null,
-        CreateUser: null,
-        CreateDate: null,
-        ModifyUser: null,
-        ModifyDate: null,
-        SeccodeId: null,
-        PaymentDate: null,
-        ReferenceNumber: null,
-        Description: null,
-        Amount: null,
-        Type: null,
-        AccountId: null,
-        Account: null,
-        PaymentDistributions: {},
-      };
-    }
+    // if (App.isOnline()) {
+    //   this.inherited(arguments);
+    // } else {
+    this.onRequestTemplateSuccess();
+    return {
+      $httpStatus: 200,
+      $descriptor: '',
+      PaymentId: null,
+      CreateUser: null,
+      CreateDate: null,
+      ModifyUser: null,
+      ModifyDate: null,
+      SeccodeId: null,
+      PaymentDate: null,
+      ReferenceNumber: null,
+      Description: null,
+      Amount: null,
+      Type: null,
+      AccountId: null,
+      Account: null,
+      PaymentDistributions: {},
+    };
+    // }
   },
   accountLookupWhere: function accountLookupWhere() {
     return '';
