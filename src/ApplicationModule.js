@@ -515,12 +515,88 @@ const __class = declare('crm.ApplicationModule', [ApplicationModule], /** @lends
     }));
 
     this.registerView(new TicketActivityList());
+    this.registerView(new ActivityList({
+      id: 'ticket_activity_related',
+      insertView: 'ticket_activity_types_list',
+      returnTo: 'ticket_detail',
+      options: { track: false, returnTo: 'ticket_detail' },
+      _transitionOptions: { track: false, returnTo: 'ticket_detail' },
+      expose: false,
+      defaultSearchTerm: () => {
+        return '';
+      },
+      _transitionComplete: function _transitionComplete(arg, options) {
+        if (!options) {
+          options = {
+            track: false,
+            returnTo: 'ticket_detail',
+          };
+        }
+        if (!options.track && typeof options.track !== 'boolean') {
+          options.track = false;
+        }
+        if (!options.returnTo) {
+          options.returnTo = 'ticket_detail';
+        }
+        return options;
+      },
+      _show: function _show() {
+        if (!this.options) {
+          this.options = {
+            track: false,
+            returnTo: 'ticket_detail',
+          };
+        }
+        if (!this.options.track && typeof this.options.track !== 'boolean') {
+          this.options.track = false;
+        }
+        if (!this.options.returnTo) {
+          this.options.returnTo = 'ticket_detail';
+        }
+      },
+    }));
+    this.registerView(new ActivityComplete({
+      id: 'ticket_activity_complete',
+      followupView: 'ticket_activity_related',
+      returnTo: 'ticket_detail',
+      options: { track: false, returnTo: 'ticket_detail' },
+      expose: false,
+      defaultSearchTerm: () => {
+        return '';
+      },
+    }));
+    this.registerView(new ActivityTypesList({
+      id: 'ticket_activity_types_list',
+      editView: 'ticket_activity_insert',
+      returnTo: 'ticket_detail',
+      expose: false,
+      options: { track: false, returnTo: 'ticket_detail' },
+      negateHistory: true,
+      track: false,
+      defaultSearchTerm: () => {
+        return '';
+      },
+    }));
+    const ticketActivityInsert = new ActivityEdit({
+      id: 'ticket_activity_insert',
+      listView: 'ticket_activity_types_list',
+      returnTo: 'ticket_activity_types_list',
+      completeView: 'ticket_activity_complete',
+      expose: false,
+      options: { track: false, returnTo: 'ticket_detail' },
+      negateHistory: true,
+      defaultSearchTerm: () => {
+        return '';
+      },
+    });
+    this.registerView(ticketActivityInsert);
     this.registerView(new TicketActivityDetail());
     this.registerView(new TicketActivityEdit());
     this.registerView(new TicketActivityRateLookup());
     this.registerView(new TicketActivityList({
       id: 'ticketactivity_related',
       expose: false,
+      // options: { returnTo: 'ticket_detail' },
       defaultSearchTerm: () => {
         return '';
       },

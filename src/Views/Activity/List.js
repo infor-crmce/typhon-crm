@@ -426,6 +426,12 @@ const __class = declare('crm.Views.Activity.List', [List, _RightDrawerListMixin]
       this.inherited(activateEntry, arguments);
     }
   },
+  show: function show() {
+    if (typeof this._show === 'function') {
+      this._show(arguments);
+    }
+    this.inherited(show, arguments);
+  },
 });
 
 export default __class;

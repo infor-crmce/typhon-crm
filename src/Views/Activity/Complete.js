@@ -375,7 +375,7 @@ const __class = declare('crm.Views.Activity.Complete', [Edit], {
       insert: true,
       title: this.followupValueText[this.fields.Followup.getValue()],
     }, {
-      returnTo: -1,
+      returnTo: this.returnTo || -1,
     });
   },
   completeActivity: function completeActivity(entry, callback) {

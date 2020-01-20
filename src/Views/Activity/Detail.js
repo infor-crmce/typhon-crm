@@ -189,7 +189,7 @@ const __class = declare('crm.Views.Activity.Detail', [Detail], {
       }
 
       view.show(options, {
-        returnTo: -1,
+        returnTo: this.returnTo || -1,
       });
     }
   },

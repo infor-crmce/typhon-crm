@@ -193,8 +193,10 @@ const __class = declare('crm.Views.Activity.Edit', [Edit], /** @lends crm.Views.
       // Editing single occurrence results in new $key/record
       view.show({
         key: updatedEntry.$key,
+        returnTo: this.options && this.options.returnTo,
+        track: (this.options && this.options.track) || false,
       }, {
-        returnTo: -2,
+        returnTo: this.returnTo || -2,
       });
     } else {
       this.onUpdateCompleted(updatedEntry);
@@ -971,6 +973,18 @@ const __class = declare('crm.Views.Activity.Edit', [Edit], /** @lends crm.Views.
     }
 
     return startDate;
+  },
+  transitionComplete: function transitionComplete(_page, options) {
+    if (typeof this._transitionComplete === 'function') {
+      arguments[1] = this._transitionComplete(_page, options);
+    }
+    this.inherited(transitionComplete, arguments);
+  },
+  open: function open() {
+    if (typeof this._open === 'function') {
+      this._open(arguments);
+    }
+    this.inherited(open, arguments);
   },
   _getNewAlarmTime: function _getNewAlarmTime(startDate, timeless, reminderIn) {
     let alarmTime;

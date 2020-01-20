@@ -181,7 +181,7 @@ const __class = declare('crm.Views.Ticket.Detail', [Detail], {
       children: [{
         name: 'ActivityRelated',
         label: this.relatedActivitiesText,
-        view: 'activity_related',
+        view: 'ticket_activity_related',
         where: this.formatRelatedQuery.bindDelegate(this, 'TicketId eq "${0}"'),
       }, {
         name: 'TicketActivityRelated',

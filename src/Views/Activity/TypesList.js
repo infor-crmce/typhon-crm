@@ -101,10 +101,11 @@ const __class = declare('crm.Views.Activity.TypesList', [List], {
           activityType: params.key,
           title: this.activityTypeText[params.key],
           returnTo: this.options && this.options.returnTo,
+          track: (this.options && this.options.track) || false,
           currentDate: this.options && this.options.currentDate,
           unscheduled: this.options.unscheduled,
         }, {
-          returnTo: -1,
+          returnTo: (this.options && this.options.returnTo) || this.returnTo || -1,
         });
       }
     }
