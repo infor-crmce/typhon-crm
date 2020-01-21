@@ -56,6 +56,11 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
   onPaymentChange: function onPaymentChange(value, field) {
     const selection = field.getSelection();
     this.fields.AmountLeft.setValue(utility.getValue(selection, 'PaymentTotals.AmountLeft'));
+    let display = utility.getValue(selection, 'ReferenceNumber');
+    if (!display) {
+      display = value.key;
+    }
+    this.fields.Payment.setText(display);
   },
   createTypeList: function createTypeList() {
     const list = [];
