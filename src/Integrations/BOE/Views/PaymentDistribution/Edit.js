@@ -18,6 +18,7 @@ import lang from 'dojo/_base/lang';
 // import connect from 'dojo/_base/connect';
 import Edit from 'argos/Edit';
 // import MODEL_NAMES from '../../Models/Names';
+import utility from 'argos/Utility';
 import format from 'crm/Format';
 // import validator from 'crm/Validator';
 import getResource from 'argos/I18n';
@@ -49,6 +50,12 @@ const __class = declare('crm.Integrations.BOE.Views.PaymentDistribution.Edit', [
 
   init: function init() {
     this.inherited(init, arguments);
+
+    this.connect(this.fields.Payment, 'onChange', this.onPaymentChange);
+  },
+  onPaymentChange: function onPaymentChange(value, field) {
+    const selection = field.getSelection();
+    this.fields.AmountLeft.setValue(utility.getValue(selection, 'PaymentTotals.AmountLeft'));
   },
   createTypeList: function createTypeList() {
     const list = [];
